@@ -8,13 +8,15 @@ grid-template-columns: 42px 42px;
 `
 
 
-const BattleshipGrid = ({ cells }) => {
+const BattleshipGrid = ({ cells, onCellClick }) => {
     const cellGrid = cells.map((cell) => {
         return (
             <BattleshipCell
+                cell={cell}
                 key={cell.number}
                 shotAt={cell.shotAt}
                 shipPresent={cell.shipPresent}
+                onCellClick={onCellClick}
             />
         )
     })

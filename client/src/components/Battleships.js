@@ -27,11 +27,25 @@ const Battleships = () => {
             }
         ]
     )
+    const onCellClick = (clickedCell) => {
+        const updatedCells = []
+        cells.map((cell) => {
+            if (clickedCell.number === cell.number) {
+                cell.shotAt = true
+            }
+            updatedCells.push(cell)
+            setCells(updatedCells)
+        })
+
+    }
 
     return (
         <>
             <h1>Battleships</h1>
-            <BattleshipGrid cells={cells} />
+            <BattleshipGrid
+                cells={cells}
+                onCellClick={onCellClick}
+            />
         </>
     )
 }

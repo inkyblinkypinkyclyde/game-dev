@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 
 const Cell = styled.div`
+background-color: grey;
 margin: 2px;
 border: 1px black;
 width: 40px;
@@ -18,8 +19,7 @@ const BlueDiv = styled.div`
 background-color: blue;
 `
 
-const BattleshipCell = ({ shotAt, shipPresent }) => {
-    console.log(shotAt)
+const BattleshipCell = ({ cell, shotAt, shipPresent, onCellClick }) => {
     const cellStatusRender = (shotAt, shipPresent) => {
         if (shotAt === true) {
             if (shipPresent === true) {
@@ -28,13 +28,20 @@ const BattleshipCell = ({ shotAt, shipPresent }) => {
                 return <h3>M</h3>
             }
         } else {
-            console.log('here')
             return <h3>E</h3>
         }
     }
+
+    const handleClick = () => {
+        console.log('now')
+        onCellClick(cell)
+    }
     return (
-        <Cell>
-            {cellStatusRender(shotAt, shipPresent)}
+        <Cell onClick={handleClick}>
+
+            {
+                cellStatusRender(shotAt, shipPresent)
+            }
         </Cell>
     )
 }
