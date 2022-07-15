@@ -13,7 +13,8 @@ const BattleshipGrid = ({
     playerCells,
     opponentCells,
     onCellClickAttack,
-    onCellClickPlace
+    onCellClickPlace,
+    gamePhase
 }) => {
 
     // const cellGrid = () => {
@@ -58,6 +59,7 @@ const BattleshipGrid = ({
                 shipPresent={cell.shipPresent}
                 onCellClickAttack={onCellClickAttack}
                 onCellClickPlace={onCellClickPlace}
+                gamePhase={gamePhase}
             />
         )
     })
@@ -71,6 +73,7 @@ const BattleshipGrid = ({
                 shipPresent={cell.shipPresent}
                 onCellClickAttack={onCellClickAttack}
                 onCellClickPlace={onCellClickPlace}
+                gamePhase={gamePhase}
             />
         )
     })

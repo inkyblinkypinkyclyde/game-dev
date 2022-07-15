@@ -41,15 +41,18 @@ const BattleshipCell = ({
     shotAt,
     shipPresent,
     onCellClickAttack,
-    onCellClickPlace
+    onCellClickPlace,
+    gamePhase
 }) => {
 
     const handleClick = () => {
-        // console.log(playerGrid)
         if (playerGrid === false) {
-            onCellClickAttack(cell)
+            if (gamePhase === 1) {
+                onCellClickAttack(cell)
+            }
         } else {
-            onCellClickPlace(cell)
+            if (gamePhase === 0)
+                onCellClickPlace(cell)
         }
     }
     return (

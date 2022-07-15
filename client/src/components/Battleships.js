@@ -51,6 +51,25 @@ const Battleships = () => {
             }
         ]
     )
+    const [playerShips, setPlayerShips] = useState([
+        {
+            name: 'Friendly Frigate',
+            locations: [],
+            shipHealth: 2,
+            horizontal: true
+        }
+    ])
+    const [opponentShips, setopponentShips] = useState([
+        {
+            name: 'enemy Frigate',
+            locations: [],
+            shipHealth: 2,
+            horizontal: true
+        }
+    ])
+    const [activeShip, setActiveShip] = useState(null)
+    const [gamePhase, setGamePhase] = useState(0)
+
     const onCellClickAttack = (clickedCell) => {
         const updatedCells = []
         opponentCells.map((cell) => {
@@ -59,6 +78,7 @@ const Battleships = () => {
             }
             updatedCells.push(cell)
             setOpponentCells(updatedCells)
+            setGamePhase(2)
         })
     }
 
@@ -78,6 +98,7 @@ const Battleships = () => {
             <h1>Battleships</h1>
             <h3>Opponent Grid</h3>
             <BattleshipGrid
+                gamePhase={gamePhase}
                 playerGrid={false}
                 playerCells={playerCells}
                 opponentCells={opponentCells}
@@ -86,6 +107,7 @@ const Battleships = () => {
             />
             <h3>Player Grid</h3>
             <BattleshipGrid
+                gamePhase={gamePhase}
                 playerGrid={true}
                 playerCells={playerCells}
                 opponentCells={opponentCells}
