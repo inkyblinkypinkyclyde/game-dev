@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {Link} from "react-router-dom"
-import styled from "styled-components"
+import styled, {createGlobalStyle} from "styled-components"
+import GeckoFont from '../static/fonts/GeckoFont.ttf'
 
 const NavBar = () => {
 
@@ -8,7 +9,7 @@ const NavBar = () => {
 
     return (
         <Nav>
-            <Logo href='/'>React<span>'R'</span>cade</Logo>
+            <GlobalStyle/><Logo href='/'>React<span>'R'</span>cade</Logo>
             <Hamburger onClick={() => setStyling(!styling)}>
                 <span></span>
                 <span></span>
@@ -22,6 +23,14 @@ const NavBar = () => {
         </Nav>
     )
 }
+
+const GlobalStyle = createGlobalStyle`
+    @font-face {
+        font-family: 'Gecko';
+        src: url(${GeckoFont}) format('truetype');
+        font-display: auto;
+    }
+`
 
 const Nav = styled.div`
 padding: 0 2rem;
@@ -70,22 +79,24 @@ cursor: pointer;
 text-align: center;
 text-decoration: none;
 color: white;
-transition: all 0.3s ease-in;
-font-size: 1rem;
+transition: all 0.2s ease-in;
+font-size: 1.5rem;
+font-weight: 700;
 &:hover {
-    color: dodgerblue;
+    color: red;
 }
 `
 
 const Logo = styled.a`
+font-family: 'Gecko';
  padding: 1rem 0;
  color: white;
  text-decoration: none;
- font-weight: 700;
- font-size: 2.5rem;
+ font-weight: 200;
+ font-size: 3rem;
  span {
-     font-weight: 800;
-     font-size: 2.5rem;
+     font-weight: 300;
+     font-size: 3rem;
  }
 `
 
