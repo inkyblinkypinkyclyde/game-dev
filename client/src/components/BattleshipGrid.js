@@ -8,20 +8,47 @@ grid-template-columns: 42px 42px;
 `
 
 
-const BattleshipGrid = ({ cells }) => {
-    const cellGrid = cells.map((cell) => {
+const BattleshipGrid = ({
+    playerGrid,
+    playerCells,
+    opponentCells,
+    onCellClickAttack,
+    onCellClickPlace,
+    gamePhase
+}) => {
+
+    const cellGridPlayer = playerCells.map((cell) => {
         return (
             <BattleshipCell
+                playerGrid={playerGrid}
+                cell={cell}
                 key={cell.number}
                 shotAt={cell.shotAt}
                 shipPresent={cell.shipPresent}
+                onCellClickAttack={onCellClickAttack}
+                onCellClickPlace={onCellClickPlace}
+                gamePhase={gamePhase}
+            />
+        )
+    })
+    const cellGridOpponent = opponentCells.map((cell) => {
+        return (
+            <BattleshipCell
+                playerGrid={playerGrid}
+                cell={cell}
+                key={cell.number}
+                shotAt={cell.shotAt}
+                shipPresent={cell.shipPresent}
+                onCellClickAttack={onCellClickAttack}
+                onCellClickPlace={onCellClickPlace}
+                gamePhase={gamePhase}
             />
         )
     })
 
     return (
         <Grid>
-            {cellGrid}
+            {playerGrid ? cellGridPlayer : cellGridOpponent}
         </Grid>
     )
 }

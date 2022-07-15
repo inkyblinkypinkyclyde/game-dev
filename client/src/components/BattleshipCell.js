@@ -7,34 +7,57 @@ border: 1px black;
 width: 40px;
 height: 40px;
 `
-
-const RedDiv = styled.div`
-background-color: red;
-`
-const GreyDiv = styled.div`
-background-color: grey;
-`
-const BlueDiv = styled.div`
-background-color: blue;
-`
-
-const BattleshipCell = ({ shotAt, shipPresent }) => {
-    console.log(shotAt)
-    const cellStatusRender = (shotAt, shipPresent) => {
-        if (shotAt === true) {
+const ColoredDiv = styled.div`
+width: 100%;
+height: 100%;
+background-color: ${({
+    playerGrid,
+    shotAt,
+    shipPresent
+}) => {
+        if (playerGrid === true) {
             if (shipPresent === true) {
-                return <h3>H</h3>
+                return 'black'
             } else {
-                return <h3>M</h3>
+                return 'grey'
             }
         } else {
-            console.log('here')
-            return <h3>E</h3>
+            if (shotAt === true) {
+                if (shipPresent === true) {
+                    return 'red'
+                } else {
+                    return 'blue'
+                }
+            } else {
+                return 'grey'
+            }
+        }
+    }};
+`
+
+const BattleshipCell = ({
+    playerGrid,
+    cell,
+    shotAt,
+    shipPresent,
+    onCellClickAttack,
+    onCellClickPlace,
+    gamePhase
+}) => {
+
+    const handleClick = () => {
+        if (playerGrid === false) {
+            if (gamePhase === 1) {
+                onCellClickAttack(cell)
+            }
+        } else {
+            if (gamePhase === 0)
+                onCellClickPlace(cell)
         }
     }
     return (
-        <Cell>
-            {cellStatusRender(shotAt, shipPresent)}
+        <Cell onClick={handleClick}>
+            <ColoredDiv playerGrid={playerGrid} shotAt={shotAt} shipPresent={shipPresent} />
         </Cell>
     )
 }
