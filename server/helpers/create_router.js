@@ -31,7 +31,7 @@ const createRouter = function (collection) {
     .catch((err) => {
       console.error(err)
       res.statusMessage(500)
-      res.json({stsus: 500, error: err})
+      res.json({status: 500, error: err})
     })
   })
 
