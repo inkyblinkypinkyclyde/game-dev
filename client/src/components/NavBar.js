@@ -2,27 +2,6 @@ import React, { useState } from 'react'
 import {Link} from "react-router-dom"
 import styled from "styled-components"
 
-// const NavList =styled.ul`
-// display:flex;
-// justify-content: space-evenly;
-// list-style: none;
-// padding: 1rem;
-// `
-
-// const Styledh1 = styled.h1`
-// display:flex;
-// justify-content: center;
-// margin-left: 2rem;
-// `
-
-// const StyledLink = styled(Link)`
-// text-decoration: none;
-// color: #054569;
-// padding: 2rem;
-// font-weight: bold;`
-
-
-
 const NavBar = () => {
 
     const [styling, setStyling] = useState(false)
@@ -111,17 +90,3 @@ const Logo = styled.a`
 `
 
 export default NavBar
-
-{/* <ul>
-<li>
-    <Link to="/">Home</Link>
-</li>
-
-<li>
-    <Link to="/battleships">Battleships</Link>
-</li>
-
-<li>
-    <Link to="/about">About</Link>
-</li>
-</ul>  */}
