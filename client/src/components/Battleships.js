@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BattleshipGrid from "./BattleshipGrid";
+import Ships from "./Ships";
 
 const Battleships = () => {
 
@@ -54,8 +55,19 @@ const Battleships = () => {
     const [playerShips, setPlayerShips] = useState([
         {
             name: 'Friendly Frigate',
-            locations: [],
-            shipHealth: 2,
+            _shipId: 1,
+            length: [
+                {
+                    _cellId: 1,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: 2,
+                    location: null,
+                    shotAt: false,
+                }
+            ],
             horizontal: true
         }
     ])
@@ -113,7 +125,10 @@ const Battleships = () => {
                 opponentCells={opponentCells}
                 onCellClickAttack={onCellClickAttack}
                 onCellClickPlace={onCellClickPlace}
+
             />
+            <h3>Player ships</h3>
+            <Ships playerShips={playerShips} />
         </>
     )
 }
