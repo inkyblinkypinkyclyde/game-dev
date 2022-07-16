@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
+#root {
+  background-color:#348C31;
+  width: 80%;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.title {
+  -webkit-text-stroke: 1px #e4f9fa;
+  text-shadow: 2px 2px #111;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 7rem;
+}
+
+.music-btn {
+  color: black;
+  cursor: pointer;
+  border-radius: 50%;
+  border: .3rem solid #E4F9FA;
+  position: fixed;
+  top: 8vh;
+  padding: 0.5rem;
+  right: 5vw;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-btn img {
+  padding: 1rem;
+  width: 50%;
+  height: 50%;
+}
+
+.main-p {
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 3rem;
+  background-color: #212121;
+  border-radius: 0.8rem;
+  padding: 1rem 10rem;
+  border: 1px solid;
+  font-size: 1.5rem;
+  color: #e4f9fa;
+  transition: 0.1s ease-in;
+  text-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card {
+  padding: 1rem;
+  text-align: center;
+  width: 60vw;
+  max-width: 70%;
+  background-color: #212121;
+  border: 2px solid;
+  color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  height: 70%;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.card h2 {
+  font-size: 4rem;
+  margin-bottom: 4rem;
+  text-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card p {
+  font-size: 1.8rem;
+  text-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card button {
+  cursor: pointer;
+  margin-top: 5rem;
+  border: none;
+  color: white;
+  border-radius: 0.8rem;
+  border: 2px solid;
+  padding: 1.5rem 3rem;
+  background-color: green;
+  font-family: "Press Start 2P", cursive;
+  font-size: 1.6rem;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card button:focus {
+  outline: none;
+}
+
+.game-grid {
+  background-color: #348C31;
+  transform: rotate(45deg) translate(-3rem, -3rem);
+  display: grid;
+  grid-template-columns: repeat(3, 5rem);
+  grid-template-rows: repeat(3, 5rem);
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.grid-item {
+  background-color: #348C31;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.hole {
+  background-color: #348C31;
+  position: absolute;
+  width: 100%;
+  bottom: 0.5rem;
+}
+
+.hole-content {
+  background-color: #348C31;
+  transform: scale(1.5);
+  width: 100%;
+  position: relative;
+  top: 5px;
+  transition: 0;
+}
+
+.mole {
+  animation: pop-up 0.1s linear;
+}
+
+@keyframes pop-up {
+  from {
+    transform: translateY(8.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .card {
+    width: 80vw;
+    max-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  html {
+    font-size: 8px;
+  }
+  .title {
+    font-size: 6rem;
+  }
+  .game-grid {
+    background-color:#348C31;
+    transform: rotate(0deg);
+    grid-template-columns: repeat(3, calc(80vw / 3));
+    grid-template-rows: repeat(3, calc(90vw / 4));
+  }
+  .grid-item {
+    height: calc(90vw / 3);
+    transform: rotate(0deg);
+  }
+  .hole-content {
+    transform: scale(1.5) translateY(2.9rem);
+    top: -18px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .title{
+    font-size: 8vw;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .card {
+    width: 90vw;
+  }
+  html {
+    font-size: 1.8vw;
+  }
+  .hole-content {
+    top: -4vw;
+  }
+}
