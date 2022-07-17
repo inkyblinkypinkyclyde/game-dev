@@ -236,10 +236,8 @@ const Battleships = () => {
     const [gamePhase, setGamePhase] = useState(0)
 
     const selectActiveShip = (ship) => {
-        console.log(ship)
         setActiveShip(ship)
     }
-
 
     const onCellClickAttack = (clickedCell) => {
         const updatedCells = []
@@ -255,34 +253,35 @@ const Battleships = () => {
 
     const setShipLocation = (location, width) => {
         const ship = activeShip
+        const returnedLocations = []
         ship.length.map((cell, index) => {
             if (ship.horizontal) {
-                cell.location = location + index
+                // cell.location = location + index
+                let newCell = location + index
+                cell.location = newCell
+                returnedLocations.push(newCell)
             } else {
-                cell.location = (width * index) + location
+                // cell.location = (width * index) + location
+                let newCell = (width * index) + location
+                cell.location = newCell
+                returnedLocations.push(newCell)
             }
         })
+        return returnedLocations
     }
 
     const onCellClickPlace = (clickedCell) => {
-        console.log(clickedCell)
-        setShipLocation(clickedCell.number, 4)
-
-
-
-
-
-
-
-
-
-
+        const newLocations = setShipLocation(clickedCell.number, 4)
         const updatedCells = []
-        playerCells.map((cell) => {
-            if (clickedCell.number === cell.number) {
-                cell.shipPresent = true
-            }
-            updatedCells.push(cell)
+        playerCells.map((playerCell) => {
+            newLocations.map((shipCell) => {
+                if (playerCell.number === shipCell) {
+                    console.log('here')
+                    playerCell.shipPresent = true
+
+                }
+            })
+            updatedCells.push(playerCell)
             setPlayerCells(updatedCells)
         })
     }
