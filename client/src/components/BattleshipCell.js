@@ -46,6 +46,7 @@ const BattleshipCell = ({
 }) => {
 
     const handleClick = () => {
+        console.log(cell)
         if (playerGrid === false) {
             if (gamePhase === 1) {
                 onCellClickAttack(cell)

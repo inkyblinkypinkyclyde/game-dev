@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Grid = styled.div`
 display: grid;
-grid-template-columns: 42px 42px;
+grid-template-columns: 42px 42px 42px 42px;
 `
 
 

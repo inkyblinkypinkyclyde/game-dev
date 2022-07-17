@@ -15,18 +15,22 @@ grid-template-columns:42px 42px 42px 42px 42px;
 `
 
 
-const Ships = ({ playerShips }) => {
+const Ships = ({ playerShips, selectActiveShip }) => {
+
 
     const availableShips = playerShips.map((ship) => {
+        const handleClick = () => {
+            selectActiveShip(ship)
+        }
         const thisShip = ship.length.map((cell) => {
             return (
-                <Cell key={cell._cellId} />
+                <Cell key={cell._cellId} onClick={handleClick} />
             )
         })
         return (
             <>
                 {ship.name}
-                <ShipDiv>
+                <ShipDiv key={ship._shipId}>
                     {thisShip}
                 </ShipDiv>
             </>
