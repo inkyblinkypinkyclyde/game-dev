@@ -24,13 +24,16 @@ const Ships = ({ playerShips, selectActiveShip }) => {
         }
         const thisShip = ship.length.map((cell) => {
             return (
-                <Cell key={cell._cellId} onClick={handleClick} />
+                <Cell
+                    key={cell._cellId}
+                    onClick={handleClick} />
             )
         })
         return (
             <>
                 {ship.name}
-                <ShipDiv key={ship._shipId}>
+                <ShipDiv
+                    key={ship._shipId}>
                     {thisShip}
                 </ShipDiv>
             </>

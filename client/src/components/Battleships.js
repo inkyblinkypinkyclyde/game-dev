@@ -163,28 +163,29 @@ const Battleships = () => {
             {
                 number: 30,
                 shotAt: false,
-                shipPresent: false,
+                shipPresent: true,
             },
             {
                 number: 31,
                 shotAt: false,
-                shipPresent: false,
+                shipPresent: true,
             }
         ]
     )
     const [opponentShips, setopponentShips] = useState([
         {
+            //this ship has been placed in locations 30 & 31 already
             name: 'Enemy Frigate',
             _shipId: 1,
             length: [
                 {
                     _cellId: 1,
-                    location: null,
+                    location: 30,
                     shotAt: false,
                 },
                 {
                     _cellId: 2,
-                    location: null,
+                    location: 31,
                     shotAt: false,
                 }
             ],
@@ -247,7 +248,8 @@ const Battleships = () => {
             }
             updatedCells.push(cell)
             setOpponentCells(updatedCells)
-            setGamePhase(2)
+            // setGamePhase(2)
+            /// Also send off location to backend
         })
     }
 
@@ -256,17 +258,20 @@ const Battleships = () => {
         const returnedLocations = []
         ship.length.map((cell, index) => {
             if (ship.horizontal) {
-                // cell.location = location + index
                 let newCell = location + index
                 cell.location = newCell
                 returnedLocations.push(newCell)
+                /// Also send off location to backend
             } else {
-                // cell.location = (width * index) + location
                 let newCell = (width * index) + location
                 cell.location = newCell
                 returnedLocations.push(newCell)
+                /// Also send off location to backend
             }
         })
+        // remove ship from array
+        setActiveShip(null)
+
         return returnedLocations
     }
 
@@ -276,9 +281,7 @@ const Battleships = () => {
         playerCells.map((playerCell) => {
             newLocations.map((shipCell) => {
                 if (playerCell.number === shipCell) {
-                    console.log('here')
                     playerCell.shipPresent = true
-
                 }
             })
             updatedCells.push(playerCell)
