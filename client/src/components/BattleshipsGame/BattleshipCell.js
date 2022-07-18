@@ -33,6 +33,7 @@ background-color: ${({
             }
         }
     }};
+
 `
 
 const BattleshipCell = ({
@@ -55,6 +56,7 @@ const BattleshipCell = ({
                 onCellClickPlace(cell)
         }
     }
+    
     return (
         <Cell onClick={handleClick}>
             <ColoredDiv playerGrid={playerGrid} shotAt={shotAt} shipPresent={shipPresent} />
