@@ -1,7 +1,8 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import HomeVideo from "../static/videos/arcade.mp4"
-import {Button} from "./Button/Button"
+
 
 const HomePage = () => {
   return (
@@ -11,8 +12,12 @@ const HomePage = () => {
             <H1>REACT'R'CADE</H1>
             <P>Welcome!</P>
             <ButtonContainer>
-              <Button className='btns' buttonStyle='btn--outline' buttonSize='btn--large'>GET STARTED</Button>
-              <Button className='btns' buttonStyle='btn--primary' buttonSize='btn--large'>PLAY GAME <i className='far fa-play-circle' /></Button>
+            <Link to='/about' className='btn-mobile'>
+              <Button1>GET STARTED</Button1>
+            </Link>   
+            <Link to='/about' className='btn-mobile'> 
+              <Button2>PLAY GAME <i className='far fa-play-circle'/></Button2>
+            </Link>  
             </ButtonContainer>
         </VideoContainer>
         <h1>Hello</h1>
@@ -28,7 +33,6 @@ const Video = styled.video`
     z-index: -1;
 `
 
-// background: url('images/.jpg') center center/cover no-repeat;
 const VideoContainer = styled.div`
     height: 938px;
     width:100%;
@@ -56,5 +60,34 @@ font-family: 'Trebuchet MS';
 const ButtonContainer = styled.div`
     margin-top:32px;
     padding: 3px;
+`
+
+const Button1 = styled.button`
+padding: 8px 20px;
+border-radius: 2px;
+outline: none;
+border: none;
+cursor: pointer;
+margin: 1rem;
+background-color: transparent;
+color: #fff;
+padding: 8px 20px;
+border: 1px solid white;
+transition: all 0.3s ease-out;
+padding: 12px 26px;
+font-size: 20px;
+`
+const Button2 = styled.button`
+padding: 8px 20px;
+border-radius: 2px;
+outline: none;
+border: none;
+cursor: pointer;
+margin: 1rem;
+background-color: white;
+color: #242424;
+border: 1px solid white;
+padding: 12px 26px;
+font-size: 20px;
 `
 export default HomePage
