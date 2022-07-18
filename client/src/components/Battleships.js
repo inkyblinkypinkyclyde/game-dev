@@ -1,177 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BattleshipGrid from "./BattleshipGrid";
 import Ships from "./Ships";
+import { getGrid } from "../services/gridService";
 
 const Battleships = () => {
 
-    const [playerCells, setPlayerCells] = useState(
-        [
-            {
-                number: 0,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 1,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 2,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 3,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 4,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 5,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 6,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 7,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 8,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 9,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 10,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 11,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 12,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 13,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 14,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 15,
-                shotAt: false,
-                shipPresent: false,
-            }
-        ]
-    )
-    const [opponentCells, setOpponentCells] = useState(
-        [
-            {
-                number: 16,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 17,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 18,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 19,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 20,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 21,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 22,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 23,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 24,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 25,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 26,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 27,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 28,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 29,
-                shotAt: false,
-                shipPresent: false,
-            },
-            {
-                number: 30,
-                shotAt: false,
-                shipPresent: true,
-            },
-            {
-                number: 31,
-                shotAt: false,
-                shipPresent: true,
-            }
-        ]
-    )
+    const [gameCells, setGameCells] = useState([]);
+    useEffect(()=>{
+        getGrid()
+        .then((data) => {
+            console.log(data);
+            setGameCells(data)
+        })
+    })
+    const [opponentCells, setOpponentCells] = useState([])
     const [opponentShips, setopponentShips] = useState([
         {
             //this ship has been placed in locations 30 & 31 already
