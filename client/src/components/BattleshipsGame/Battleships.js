@@ -246,7 +246,7 @@ const Battleships = () => {
             if (clickedCell.number === cell.number) {
                 cell.shotAt = true
             }
-            updatedCells.push(cell)
+        updatedCells.push(cell)
             setOpponentCells(updatedCells)
             // setGamePhase(2)
             /// Also send off location to backend
@@ -288,6 +288,22 @@ const Battleships = () => {
             setPlayerCells(updatedCells)
         })
     }
+
+    const checkAllShipsPlaced = () => {
+        const checkShipsPlaced = []
+        playerShips.forEach(ship => checkShipsPlaced.push(ship.length[0].location))
+        console.log(checkShipsPlaced.includes(null))
+        if (checkShipsPlaced.includes(null) === false){
+            setGamePhase(1)
+            console.log(checkShipsPlaced)
+        }
+    }
+
+    const gameLoop = () => {
+        checkAllShipsPlaced()
+    }
+
+
     return (
         <>
             <h1>Battleships</h1>
@@ -308,13 +324,14 @@ const Battleships = () => {
                 opponentCells={opponentCells}
                 onCellClickAttack={onCellClickAttack}
                 onCellClickPlace={onCellClickPlace}
-
             />
             <h3>Player ships</h3>
             <Ships
                 playerShips={playerShips}
                 selectActiveShip={selectActiveShip}
             />
+            <p>Place Ships then press start game when ready:</p>
+            <button onClick={gameLoop}>Start Game</button>
         </>
     )
 }

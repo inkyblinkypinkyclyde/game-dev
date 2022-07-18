@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import About from '../components/About';
-import Battleships from '../components/Battleships';
+import Battleships from '../components/BattleshipsGame/Battleships';
 import HomePage from '../components/HomePage';
 import NavBar from '../components/NavBar';
 
