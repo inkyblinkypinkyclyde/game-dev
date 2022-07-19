@@ -240,6 +240,21 @@ const GamesContainer = () => {
 
     }
 
+    const canPlaceVerticalCheck = () => {
+        return true
+    }
+    const removeShipFromList = (player) => {
+        const newShipList = []
+        if (player === 1) {
+            playerOneShips.map((shipInList) => {
+                if (shipInList != playerOneActiveShip) {
+                    newShipList.push(shipInList)
+                }
+            })
+            setPlayerOneShips(newShipList)
+        }
+    }
+
     const placeShipOnHorizontalPlayerOne = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerOneCells]
@@ -253,12 +268,13 @@ const GamesContainer = () => {
             }
         })
         setPlayerOneCells(newPlayerCells)
+        removeShipFromList(1)
     }
     const placeShipOnVerticalPlayerOne = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
-            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+            if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
                 playerCell.value = 's'
                 newPlayerCells[index + 4].value = 's'
                 if (shipLength === 3) {
@@ -268,8 +284,6 @@ const GamesContainer = () => {
         })
         setPlayerOneCells(newPlayerCells)
     }
-
-
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerTwoCells]
@@ -289,7 +303,7 @@ const GamesContainer = () => {
         console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerTwoCells]
         newPlayerCells.forEach((playerCell, index) => {
-            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+            if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
                 playerCell.value = 's'
                 // console.log(index)
                 newPlayerCells[index + 4].value = 's'
