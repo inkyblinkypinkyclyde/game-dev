@@ -20,10 +20,10 @@ const NavBar = () => {
                 <MenuLink to='/'>Home</MenuLink>
                 <MenuLink to='/battleships/start'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
+                <SearchBar>
+                    <input type="text" placeholder="Search.." />
+                </SearchBar>
             </Menu>
-            <SearchBar>
-                <input type="text" placeholder="Search.." />
-            </SearchBar>
 
 
         </Nav>

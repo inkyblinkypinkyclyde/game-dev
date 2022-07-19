@@ -1,40 +1,24 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const MongoClient = require('mongodb').MongoClient;
-const bodyParser = require('body-parser')
-const createRouter = require('./helpers/create_router.js');
-const http = require('http').createServer(app)
-
-player = {"username": "string", "score": "integer"};
 
 app.use(express.json());
 app.use(cors());
 
-MongoClient.connect('mongodb://127.0.0.1:27017',
-{useUnifiedTopology: true})
-.then((client) => {
-  const db = client.db('leaderboard');
-  const scoresCollection = db.collection('scores');
-  const scoresRouter = createRouter(scoresCollection);
-  app.use('/api/scores', scoresRouter);
-})
 
-.catch(console.error)
+//CHATBOX DB
 
-app.get('/', function require(req, res) {
-  res.json({message: "This is working!"});
-});
-
-app.listen(9000, function(){
-  console.log(`Leaderboard server running on port 9000`);
-});
+const mongoose = require('mongoose')
+const mongoDB = 'mongodb+srv://jslater:jslater123@cluster0.ty2du.mongodb.net/message-database?retryWrites=true&w=majority';
+const Message = require('./models/messages')
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+  console.log("connected via mongoose");
+}).catch(err => console.log(err))
 
 //CHATBOX
 
 const http = require('http');
 const { Server } = require('socket.io');
-
 const server = http.createServer(app)
 
 const io = new Server(server, {
@@ -48,9 +32,18 @@ io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
     socket.on("send_message", (data) => {
+      const dbMessage = new Message({data});
+      dbMessage.save().then(() => {
         socket.broadcast.emit("receive_message", data)
+      })
     })
-})
+    socket.on("send_player1", (data) => {
+        socket.broadcast.emit("receive_player1", data)
+    })
+    socket.on("send_player2", (data) => {
+        socket.broadcast.emit("receive_player2", data)
+    })
+  })
 
 
 server.listen(3001, () => {
