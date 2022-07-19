@@ -18,7 +18,7 @@ const NavBar = () => {
             </Hamburger>
             <Menu styling={styling}>
                 <MenuLink to='/'>Home</MenuLink>
-                <MenuLink to='/battleships/start'>Battleships</MenuLink>
+                <MenuLink to='/battleships'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
             </Menu>
             <SearchBar>

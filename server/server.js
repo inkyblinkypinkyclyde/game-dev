@@ -4,7 +4,6 @@ const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser')
 const createRouter = require('./helpers/create_router.js');
-const http = require('http').createServer(app)
 
 player = {"username": "string", "score": "integer"};
 
@@ -29,31 +28,3 @@ app.get('/', function require(req, res) {
 app.listen(9000, function(){
   console.log(`Leaderboard server running on port 9000`);
 });
-
-//CHATBOX
-
-const http = require('http');
-const { Server } = require('socket.io');
-
-const server = http.createServer(app)
-
-const io = new Server(server, {
-    cors: {
-        origin: "http://localhost:3000",
-        methods: ["GET", "POST"],
-    },
-});
-
-io.on("connection", (socket) => {
-    console.log(`User Connected: ${socket.id}`);
-
-    socket.on("send_message", (data) => {
-        socket.broadcast.emit("receive_message", data)
-    })
-})
-
-
-server.listen(3001, () => {
-    console.log("SERVER IS RUNNING");
-})
-
