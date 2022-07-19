@@ -24,7 +24,7 @@ const HomePage = () => {
       socket.on("receive_message", (data) => {
         console.log(`Message Received: ${data}`);
         if (data.updatedMessages !== messages)
-        setMessages(data.updatedMessages)
+          setMessages(data.updatedMessages)
         })
     }, [socket])
 
