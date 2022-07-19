@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import styled, {createGlobalStyle} from "styled-components"
 import GeckoFont from '../static/fonts/GeckoFont.ttf'
 
+
 const NavBar = () => {
 
     const [styling, setStyling] = useState(false)
@@ -20,6 +21,11 @@ const NavBar = () => {
                 <MenuLink to='/battleships/start'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
             </Menu>
+            <SearchBar>
+                <input type="text" placeholder="Search.." />
+            </SearchBar>
+
+
         </Nav>
     )
 }
@@ -86,6 +92,8 @@ font-weight: 700;
     color: red;
 }
 `
+const SearchBar = styled.div`
+`
 
 const Logo = styled.a`
 font-family: 'Gecko';
@@ -97,7 +105,7 @@ font-family: 'Gecko';
  span {
      font-weight: 300;
      font-size: 3rem;
- }
+}
 `
 
 export default NavBar
