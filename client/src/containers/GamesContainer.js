@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import About from '../components/About';
@@ -16,11 +16,11 @@ const GamesContainer = () => {
         [
             {
                 _cellId: 100,
-                value: 's'
+                value: '_'
             },
             {
                 _cellId: 101,
-                value: 's'
+                value: '_'
             },
             {
                 _cellId: 102,
@@ -249,29 +249,40 @@ const GamesContainer = () => {
             newCells.push(gridCell)
         })
     }
+    const canPlaceHorizontalCheck = (index, width, length) => {
+        const x = index % width;
+        return (x + length <= width)
 
-    // const cellColor = (cell) => {
-    //     if (cell._cellId < 0) {
-    //         if (!cell.location) {
-    //             return 'grey'
-    //         } else {
-    //             return 'white'
-    //         }
-    //     } else {
-    //         if (cell.value === '_') { return 'grey' }
-    //         if (cell.value === 's') { return 'grey' }
-    //         if (cell.value === 'h') { return 'red' }
-    //         if (cell.value === 'm') { return 'blue' }
-    //         if (cell.value === '') {}
-    //             if (shipPresent === true) {
-    //                 return 'red'
-    //             } else {
-    //                 return 'blue'
-    //             }
-    //         } else {
-    //         return 'grey'
-    //     }
-    // }
+    }
+    const placeShipOnHorizontal = (clickedCell, width, shipLength) => {
+        // make empty list for new cells
+        // loop through player cells
+        // match player cell to clicked cell
+        // if player cell is the same as clicked cell:
+        //make player cell value into 's' AND make the next player cell value into 's' for the length of the ship
+        // push the cell into the empty list
+        // assign the empty list to the player cell list in state
+
+        // (index % width) = x
+        // if x + length > width
+
+
+        const newPlayerCells = [...playerOneCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                newPlayerCells[index + 1].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 2].value = 's'
+                }
+                // console.log(playerCell)
+                console.log(newPlayerCells[index])
+            }
+        })
+        console.log(playerOneCells)
+        console.log(newPlayerCells)
+        setPlayerOneCells(newPlayerCells)
+    }
 
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
@@ -280,7 +291,7 @@ const GamesContainer = () => {
             if (id <= -110 && id >= -119) { setPlayerOneActiveShip(playerOneShips[1]) }
             if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(playerTwoShips[0]) }
             if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(playerTwoShips[1]) }
-            if (playerOneActiveShip) { placePlayerOneShipAt(id) }
+            if (playerOneActiveShip) { placeShipOnHorizontal(id, 4, playerOneActiveShip.length.length) }
             // if (playerTwoActiveShip) { placePlayerTwoShipAt(id) }
         }
     }
@@ -290,7 +301,7 @@ const GamesContainer = () => {
             <Router>
                 <NavBar />
                 <Routes>
-                    <Route path='/' element={<HomePage/>} />
+                    <Route path='/' element={<HomePage />} />
                     <Route path='/battleships/start/' element={<GameStartPage />} />
                     <Route
                         path='/battleships/player_one'
@@ -322,7 +333,7 @@ const GamesContainer = () => {
                     />
                     <Route path='/about' element={< About />} />
                 </Routes>
-                <Footer/>
+                <Footer />
             </Router>
         </MainContainer>
 

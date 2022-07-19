@@ -43,10 +43,10 @@ background-color: ${({
 
 
 const Cell = ({ cell, clickHandler, playerGrid }) => {
-    console.log(`player grid bool is: ` + playerGrid)
+    // console.log(`player grid bool is: ` + playerGrid)
     const handleClick = () => {
         // console.log(cell._cellId)
-        console.log(cell)
+        // console.log(cell)
         clickHandler(cell._cellId)
     }
 
