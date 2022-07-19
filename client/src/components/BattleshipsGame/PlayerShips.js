@@ -48,14 +48,16 @@ const PlayerShips = ({ playerOneShips, playerTwoShips, playerShips, clickHandler
             )
         })
         return (
-            <>
+            <div
+                key={ship._shipId}
+            >
                 {ship.name}
                 <ShipDiv
-                    key={ship._shipId}
+
                 >
                     {thisShip}
                 </ShipDiv>
-            </>
+            </div>
         )
     })
 
