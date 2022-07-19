@@ -1,86 +1,21 @@
-use grid;
+use leaderboard;
 db.dropDatabase();
 
-db.tiles.insertMany([
+db.scores.insertMany([
   {
-    name: "1",
-    shipPresent: false,
-    shotAT: false
+    username: "Calum",
+    score: "70"
   },
   {
-    name: "2",
-    shipPresent: false,
-    shotAT: false
+    username: "Michael",
+    score: "80"
   },
   {
-    name: "3",
-    shipPresent: false,
-    shotAT: false
+    username: "Richard",
+    score: "50"
   },
   {
-    name: "4",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "5",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "6",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "7",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "8",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "9",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "10",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "11",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "12",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "13",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "14",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "15",
-    shipPresent: false,
-    shotAT: false
-  },
-  {
-    name: "16",
-    shipPresent: false,
-    shotAT: false
+    username: "Jack",
+    score: "100"
   }
 ]);
-

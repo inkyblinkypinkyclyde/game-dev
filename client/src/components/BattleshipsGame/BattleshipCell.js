@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 
 const Cell = styled.div`
-margin: 2px;
+margin: 1px;
 border: 1px black;
 width: 40px;
 height: 40px;
@@ -33,6 +33,7 @@ background-color: ${({
             }
         }
     }};
+
 `
 
 const BattleshipCell = ({
@@ -55,6 +56,7 @@ const BattleshipCell = ({
                 onCellClickPlace(cell)
         }
     }
+
     return (
         <Cell onClick={handleClick}>
             <ColoredDiv playerGrid={playerGrid} shotAt={shotAt} shipPresent={shipPresent} />
