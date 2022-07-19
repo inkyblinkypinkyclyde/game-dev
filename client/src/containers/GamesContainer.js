@@ -239,6 +239,7 @@ const GamesContainer = () => {
         return (x + length <= width)
 
     }
+
     const placeShipOnHorizontalPlayerOne = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerOneCells]
@@ -253,6 +254,22 @@ const GamesContainer = () => {
         })
         setPlayerOneCells(newPlayerCells)
     }
+    const placeShipOnVerticalPlayerOne = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerOneCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                newPlayerCells[index + 4].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 8].value = 's'
+                }
+            }
+        })
+        setPlayerOneCells(newPlayerCells)
+    }
+
+
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerTwoCells]
@@ -268,7 +285,21 @@ const GamesContainer = () => {
         })
         setPlayerTwoCells(newPlayerCells)
     }
-
+    const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerTwoCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                // console.log(index)
+                newPlayerCells[index + 4].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 8].value = 's'
+                }
+            }
+        })
+        setPlayerTwoCells(newPlayerCells)
+    }
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
         if (gamePhase === 0) {
@@ -276,8 +307,20 @@ const GamesContainer = () => {
             if (id <= -110 && id >= -119) { setPlayerOneActiveShip(playerOneShips[1]) }
             if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(playerTwoShips[0]) }
             if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(playerTwoShips[1]) }
-            if (playerOneActiveShip) { placeShipOnHorizontalPlayerOne(id, 4, playerOneActiveShip.length.length) }
-            if (playerTwoActiveShip) { placeShipOnHorizontalPlayerTwo(id, 4, playerTwoActiveShip.length.length) }
+            if (playerOneActiveShip) {
+                if (playerOneActiveShip.horizontal) {
+                    placeShipOnHorizontalPlayerOne(id, 4, playerOneActiveShip.length.length)
+                } else {
+                    placeShipOnVerticalPlayerOne(id, 4, playerOneActiveShip.length.length)
+                }
+            }
+            if (playerTwoActiveShip) {
+                if (playerTwoActiveShip.horizontal) {
+                    placeShipOnHorizontalPlayerTwo(id, 4, playerTwoActiveShip.length.length)
+                } else {
+                    placeShipOnVerticalPlayerTwo(id, 4, playerTwoActiveShip.length.length)
+                }
+            }
         }
     }
 
