@@ -1,10 +1,37 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import HomeVideo from "../static/videos/arcade.mp4"
 import placeholder from "../static/images/placeholder.jpg"
+import ChatBox from "./ChatBox"
+import io from 'socket.io-client';
+import MessageList from "./MessageList"
+
+const socket = io.connect("http://localhost:3001")
 
 const HomePage = () => {
+  
+  const [messages, setMessages] = useState([])
+  
+  const addMessage = (submittedMessage) => {
+    submittedMessage.id = Date.now();
+    const updatedMessages = [...messages, submittedMessage];
+    setMessages(updatedMessages);
+    socket.emit("send_message", {updatedMessages})
+  }
+
+  useEffect(() => {
+      socket.on("receive_message", (data) => {
+        console.log(`Message Received: ${data}`);
+        if (data.updatedMessages !== messages)
+        setMessages(data.updatedMessages)
+        })
+    }, [socket])
+
+  const messageList = messages.map(message => {
+    <p>{message.name}: {message.text}</p>
+  })
+
   return (
     <div>
         <VideoContainer>
@@ -59,6 +86,9 @@ const HomePage = () => {
             </div>  
           </CardContainer>
         </PreviewSection>
+        <PreviewHeader>Chat with other users or leave a message!</PreviewHeader>
+        <ChatBox onMessageSubmit={(message) => addMessage(message)}/>
+        <MessageList messages={messages}/>
     </div>
   )
 }
