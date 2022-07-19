@@ -234,39 +234,13 @@ const GamesContainer = () => {
     const [playerTwoActiveShip, setPlayerTwoActiveShip] = useState(null)
     const [gamePhase, setGamePhase] = useState(0)
 
-    const placePlayerOneShipAt = (id) => {
-        // console.log(id)
-        const newCells = []
-        playerOneCells.map((gridCell, index) => {
-            if (playerOneActiveShip.horizontal) {
-                if (gridCell._cellId === id) {
-                    playerOneActiveShip.length.map((shipCell) => {
-                        // console.log(`gridCell id is ` + gridCell._cellId)
-                        gridCell.value = 's'
-                    })
-                }
-            }
-            newCells.push(gridCell)
-        })
-    }
     const canPlaceHorizontalCheck = (index, width, length) => {
         const x = index % width;
         return (x + length <= width)
 
     }
-    const placeShipOnHorizontal = (clickedCell, width, shipLength) => {
-        // make empty list for new cells
-        // loop through player cells
-        // match player cell to clicked cell
-        // if player cell is the same as clicked cell:
-        //make player cell value into 's' AND make the next player cell value into 's' for the length of the ship
-        // push the cell into the empty list
-        // assign the empty list to the player cell list in state
-
-        // (index % width) = x
-        // if x + length > width
-
-
+    const placeShipOnHorizontalPlayerOne = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
@@ -275,13 +249,24 @@ const GamesContainer = () => {
                 if (shipLength === 3) {
                     newPlayerCells[index + 2].value = 's'
                 }
-                // console.log(playerCell)
-                console.log(newPlayerCells[index])
             }
         })
-        console.log(playerOneCells)
-        console.log(newPlayerCells)
         setPlayerOneCells(newPlayerCells)
+    }
+    const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerTwoCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                // console.log(index)
+                newPlayerCells[index + 1].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 2].value = 's'
+                }
+            }
+        })
+        setPlayerTwoCells(newPlayerCells)
     }
 
     const clickHandler = (id) => {
@@ -291,8 +276,8 @@ const GamesContainer = () => {
             if (id <= -110 && id >= -119) { setPlayerOneActiveShip(playerOneShips[1]) }
             if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(playerTwoShips[0]) }
             if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(playerTwoShips[1]) }
-            if (playerOneActiveShip) { placeShipOnHorizontal(id, 4, playerOneActiveShip.length.length) }
-            // if (playerTwoActiveShip) { placePlayerTwoShipAt(id) }
+            if (playerOneActiveShip) { placeShipOnHorizontalPlayerOne(id, 4, playerOneActiveShip.length.length) }
+            if (playerTwoActiveShip) { placeShipOnHorizontalPlayerTwo(id, 4, playerTwoActiveShip.length.length) }
         }
     }
 
@@ -314,7 +299,7 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
-                        // cellColor={cellColor}
+
                         />}
                     />
                     <Route
@@ -328,7 +313,7 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
-                        // cellColor={cellColor}
+
                         />}
                     />
                     <Route path='/about' element={< About />} />
