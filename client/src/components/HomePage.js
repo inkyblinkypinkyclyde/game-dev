@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import HomeVideo from "../static/videos/arcade.mp4"
 import placeholder from "../static/images/placeholder.jpg"
+import ChatBox from "./ChatBox"
 
 const HomePage = () => {
   return (
@@ -59,6 +60,8 @@ const HomePage = () => {
             </div>  
           </CardContainer>
         </PreviewSection>
+        <h1>Chat with other users or leave a message!</h1>
+        {/* <ChatBox></ChatBox> */}
     </div>
   )
 }
