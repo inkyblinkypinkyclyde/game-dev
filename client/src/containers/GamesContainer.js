@@ -216,7 +216,7 @@ const GamesContainer = () => {
                     shotAt: false,
                 }
             ],
-            horizontal: false
+            horizontal: true
         }
     ])
     const [playerTwoShips, setPlayerTwoShips] = useState([
@@ -284,7 +284,7 @@ const GamesContainer = () => {
                     shotAt: false,
                 }
             ],
-            horizontal: false
+            horizontal: true
         }
     ])
 
@@ -338,6 +338,10 @@ const GamesContainer = () => {
                 if (shipLength === 3) {
                     newPlayerCells[index + 2].value = 's'
                 }
+                if (shipLength === 4) {
+                    newPlayerCells[index + 2].value = 's'
+                    newPlayerCells[index + 3].value = 's'
+                }
             }
         })
         setPlayerOneCells(newPlayerCells)
@@ -353,6 +357,10 @@ const GamesContainer = () => {
                 if (shipLength === 3) {
                     newPlayerCells[index + 8].value = 's'
                 }
+                if (shipLength === 4) {
+                    newPlayerCells[index + 8].value = 's'
+                    newPlayerCells[index + 12].value = 's'
+                }
             }
         })
         setPlayerOneCells(newPlayerCells)
@@ -365,9 +373,12 @@ const GamesContainer = () => {
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
                 playerCell.value = 's'
-                // console.log(index)
                 newPlayerCells[index + 1].value = 's'
                 if (shipLength === 3) {
+                    newPlayerCells[index + 2].value = 's'
+                }
+                if (shipLength === 4) {
+                    newPlayerCells[index + 3].value = 's'
                     newPlayerCells[index + 2].value = 's'
                 }
             }
@@ -386,6 +397,11 @@ const GamesContainer = () => {
                 if (shipLength === 3) {
                     newPlayerCells[index + 8].value = 's'
                 }
+                if (shipLength === 4) {
+                    newPlayerCells[index + 8].value = 's'
+                    newPlayerCells[index + 12].value = 's'
+                }
+
             }
         })
         setPlayerTwoCells(newPlayerCells)
@@ -442,8 +458,8 @@ const GamesContainer = () => {
                 <NavBar />
                 <Routes>
 
-                    <Route path='/' element={<HomePage/>} />
-                    <Route path="/snake" element={<Snake/>}/>
+                    <Route path='/' element={<HomePage />} />
+                    <Route path="/snake" element={<Snake />} />
                     <Route path='/battleships/start/' element={<GameStartPage />} />
                     <Route
                         path='/battleships/player_one'
