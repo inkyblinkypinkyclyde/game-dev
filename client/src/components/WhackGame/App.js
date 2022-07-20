@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import GameContainer from "./containers/GameContainer";
-import DialogueCard from "./components/DialogueCard";
+import GameContainer from "./GameContainer.js";
+import DialogueCard from "./DialogueCard.js";
 import "./whackApp.css";
 
 const App = () => {

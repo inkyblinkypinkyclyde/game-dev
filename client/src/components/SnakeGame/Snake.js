@@ -122,9 +122,10 @@ const Snake = () => {
         <div>
             <Header>
                 <h1>Snake</h1>
-                <p>Your goal is to move the snake around and eat as many red “food” blocks as possible. There is only one food block at any given time. When the food is eaten, the snake grows in length. If you hit the snake itself or the edge of the board, the game is over.</p>
+                <p>Your goal is to move the snake around and eat as many red “food” blocks as possible. There is only one food block at any given time. When the food is eaten, the snake grows in length.</p>
+                <p>If you hit the snake itself or the edge of the board, the game is over.</p>
                 <p>Use the arrow keys on your keyboard to control the snakes movements.</p>
-                <CardButton onClick={handleScrollClick}>Focus on Game!</CardButton>
+                <CardButton onClick={handleScrollClick}>Press here to Focus on Game!</CardButton>
             </Header>
             <Container ref={ref}>
                 <Scores>
@@ -195,6 +196,8 @@ const Header = styled.div`
 display: flex;
 flex-direction: column;
 align-items:center;
+font-size:1.1rem;
+margin-inline:2rem;
 `
 
 const Apple = styled.i`

@@ -67,19 +67,19 @@ const HomePage = () => {
               <GameTitle>Snake</GameTitle>
               <GameDescription>Your goal is to move the snake around and eat as many red “food” blocks as possible. There is only one food block at any given time. When the food is eaten, the snake grows in length. If you hit the snake itself or the edge of the board, the game is over.</GameDescription>
               <Play>
-                <Link to='/about'>
+                <Link to='/snake'>
                   <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
                 </Link>
               </Play>
             </div>  
           </CardContainer>
           <CardContainer>
-            <GameImage src={placeholder}/>
+            <GameImageWAM src="https://i.imgur.com/O2UqN7m.jpg"/>
             <div>
               <GameTitle>Whack-A-Mole</GameTitle>
               <GameDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed. Risus feugiat in ante metus dictum. Pellentesque habitant morbi tristique senectus et netus.</GameDescription>
               <Play>
-                <Link to='/about'>
+                <Link to='/whack'>
                   <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
                 </Link>
               </Play>
@@ -127,6 +127,10 @@ flex-direction: column;
 const GameImage = styled.img`
 height:25%;
 width:25%;
+`
+const GameImageWAM = styled.img`
+height:57%;
+width:57%;
 `
 
 const Video = styled.video`

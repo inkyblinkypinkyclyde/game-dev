@@ -5,26 +5,40 @@ import styled from 'styled-components';
 const Header = styled.h2`
 overflow: hidden;
 background-color: white;
-padding: 20px 10px;
+margin-inline:2rem;
 color: black;
 text-align: center;
 `
-const Section = styled.h3`
+const Section = styled.p`
 overflow: hidden;
 background-color: white;
-padding: 20px 10px;
+margin-inline:2rem;
 color: black;
 text-align: center;
+font-size:1.2rem;
 `
-const History = styled.h3`
+const History = styled.p`
 overflow: hidden;
 background-color: white;
-padding: 20px 10px;
+margin-inline:2rem;
 color: black;
 text-align: center;
+font-size:1.2rem;
 `
-
 const Button = styled.button`
+margin-left:1rem;
+border-radius: 2px;
+cursor: pointer;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+padding: 12px 26px;
+font-size: 20px;
+&:hover {
+  transition: all 0.3s ease-out;
+  background-color: red;
+  color: white;
+}
 `
 
 const GameStartPage = () => {
@@ -33,18 +47,13 @@ const GameStartPage = () => {
         <> 
         <Header>
         <h2>BattleShips Online Game</h2>
-        </Header>
-
         <Link to='/battleships/player_one'>
-                <button>PLAYER ONE <i className='far fa-play-circle'/></button>
+                <Button>PLAYER ONE <i className='far fa-play-circle'/></Button>
         </Link>
         <Link to='/battleships/player_two'>
-                <button>PLAYER TWO <i className='far fa-play-circle'/></button>
+                <Button>PLAYER TWO <i className='far fa-play-circle'/></Button>
         </Link>
-        <Link to='/battleships/computer'>
-                <button>COMPUTER <i className='far fa-play-circle'/></button>
-        </Link>
-
+        </Header>
 
         <Section>
         <h3>How To Play</h3>
