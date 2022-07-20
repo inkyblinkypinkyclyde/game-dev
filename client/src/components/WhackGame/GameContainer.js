@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MoleHole from "../components/MoleHole";
+import MoleHole from "./MoleHole";
 
 const GameContainer = ({ setScore }) => {
   const HoleIds = [1, 2, 3, 4, 5, 6, 7, 8, 9];
