@@ -14,16 +14,14 @@ const PlayerTwo = ({
         <>
             <h3>Enemy waters</h3>
             <Grid
-                playerGrid={true}
-                playerOneCells={playerOneCells}
-                playerTwoCells={playerTwoCells}
+                playerGrid={false}
+                playerCells={playerOneCells}
                 clickHandler={clickHandler}
             />
             <h3>Your waters</h3>
             <Grid
-                playerGrid={false}
-                playerOneCells={playerOneCells}
-                playerTwoCells={playerTwoCells}
+                playerGrid={true}
+                playerCells={playerTwoCells}
                 clickHandler={clickHandler}
             />
             <PlayerShips

@@ -15,15 +15,13 @@ const PlayerOne = ({
             <h3>Enemy waters</h3>
             <Grid
                 playerGrid={false}
-                playerOneCells={playerOneCells}
-                playerTwoCells={playerTwoCells}
+                playerCells={playerTwoCells}
                 clickHandler={clickHandler}
             />
             <h3>Your waters</h3>
             <Grid
                 playerGrid={true}
-                playerOneCells={playerOneCells}
-                playerTwoCells={playerTwoCells}
+                playerCells={playerOneCells}
                 clickHandler={clickHandler}
             />
             <PlayerShips

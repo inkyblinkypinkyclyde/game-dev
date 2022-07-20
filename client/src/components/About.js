@@ -41,11 +41,11 @@ const About = () => {
                     </IconsDiv>
                 </Member>
                 <Member>
-                    <Image src={avatar}></Image>
-                    <h2>Name</h2>
+                    <Image src="https://imgur.com/a/blRPkfv"></Image>
+                    <h2>Michael Lyon</h2>
                     <IconsDiv>
-                        <Github href=""><i className="fa fa-github icon fa-3x"></i></Github>
-                        <LinkedIn href=""><i className="fa fa-linkedin icon fa-3x"></i></LinkedIn>
+                        <Github href="https://github.com/Michael19994"><i className="fa fa-github icon fa-3x"></i></Github>
+                        <LinkedIn href="https://www.linkedin.com/in/michael-lyon-6a211a227/"><i className="fa fa-linkedin icon fa-3x"></i></LinkedIn>
                     </IconsDiv>
                 </Member>
             </TeamContainer>

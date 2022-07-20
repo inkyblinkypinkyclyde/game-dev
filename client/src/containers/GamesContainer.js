@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import About from '../components/About';
@@ -17,11 +17,11 @@ const GamesContainer = () => {
         [
             {
                 _cellId: 100,
-                value: 's'
+                value: '_'
             },
             {
                 _cellId: 101,
-                value: 's'
+                value: '_'
             },
             {
                 _cellId: 102,
@@ -235,45 +235,86 @@ const GamesContainer = () => {
     const [playerTwoActiveShip, setPlayerTwoActiveShip] = useState(null)
     const [gamePhase, setGamePhase] = useState(0)
 
-    const placePlayerOneShipAt = (id) => {
-        // console.log(id)
-        const newCells = []
-        playerOneCells.map((gridCell, index) => {
-            if (playerOneActiveShip.horizontal) {
-                if (gridCell._cellId === id) {
-                    playerOneActiveShip.length.map((shipCell) => {
-                        // console.log(`gridCell id is ` + gridCell._cellId)
-                        gridCell.value = 's'
-                    })
-                }
-            }
-            newCells.push(gridCell)
-        })
+    const canPlaceHorizontalCheck = (index, width, length) => {
+        const x = index % width;
+        return (x + length <= width)
+
     }
 
-    // const cellColor = (cell) => {
-    //     if (cell._cellId < 0) {
-    //         if (!cell.location) {
-    //             return 'grey'
-    //         } else {
-    //             return 'white'
-    //         }
-    //     } else {
-    //         if (cell.value === '_') { return 'grey' }
-    //         if (cell.value === 's') { return 'grey' }
-    //         if (cell.value === 'h') { return 'red' }
-    //         if (cell.value === 'm') { return 'blue' }
-    //         if (cell.value === '') {}
-    //             if (shipPresent === true) {
-    //                 return 'red'
-    //             } else {
-    //                 return 'blue'
-    //             }
-    //         } else {
-    //         return 'grey'
-    //     }
-    // }
+    const canPlaceVerticalCheck = () => {
+        return true
+    }
+    const removeShipFromList = (player) => {
+        const newShipList = []
+        if (player === 1) {
+            playerOneShips.map((shipInList) => {
+                if (shipInList != playerOneActiveShip) {
+                    newShipList.push(shipInList)
+                }
+            })
+            setPlayerOneShips(newShipList)
+        }
+    }
 
+    const placeShipOnHorizontalPlayerOne = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerOneCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                newPlayerCells[index + 1].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 2].value = 's'
+                }
+            }
+        })
+        setPlayerOneCells(newPlayerCells)
+        removeShipFromList(1)
+    }
+    const placeShipOnVerticalPlayerOne = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerOneCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                newPlayerCells[index + 4].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 8].value = 's'
+                }
+            }
+        })
+        setPlayerOneCells(newPlayerCells)
+    }
+    const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerTwoCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                // console.log(index)
+                newPlayerCells[index + 1].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 2].value = 's'
+                }
+            }
+        })
+        setPlayerTwoCells(newPlayerCells)
+    }
+    const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
+        console.log(`ship length is:  ` + shipLength)
+        const newPlayerCells = [...playerTwoCells]
+        newPlayerCells.forEach((playerCell, index) => {
+            if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
+                playerCell.value = 's'
+                // console.log(index)
+                newPlayerCells[index + 4].value = 's'
+                if (shipLength === 3) {
+                    newPlayerCells[index + 8].value = 's'
+                }
+            }
+        })
+        setPlayerTwoCells(newPlayerCells)
+    }
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
         if (gamePhase === 0) {
@@ -281,8 +322,20 @@ const GamesContainer = () => {
             if (id <= -110 && id >= -119) { setPlayerOneActiveShip(playerOneShips[1]) }
             if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(playerTwoShips[0]) }
             if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(playerTwoShips[1]) }
-            if (playerOneActiveShip) { placePlayerOneShipAt(id) }
-            // if (playerTwoActiveShip) { placePlayerTwoShipAt(id) }
+            if (playerOneActiveShip) {
+                if (playerOneActiveShip.horizontal) {
+                    placeShipOnHorizontalPlayerOne(id, 4, playerOneActiveShip.length.length)
+                } else {
+                    placeShipOnVerticalPlayerOne(id, 4, playerOneActiveShip.length.length)
+                }
+            }
+            if (playerTwoActiveShip) {
+                if (playerTwoActiveShip.horizontal) {
+                    placeShipOnHorizontalPlayerTwo(id, 4, playerTwoActiveShip.length.length)
+                } else {
+                    placeShipOnVerticalPlayerTwo(id, 4, playerTwoActiveShip.length.length)
+                }
+            }
         }
     }
 
@@ -291,6 +344,7 @@ const GamesContainer = () => {
             <Router>
                 <NavBar />
                 <Routes>
+
                     <Route path='/' element={<HomePage/>} />
                     <Route path="/snake" element={<Snake/>}/>
                     <Route path='/battleships/start/' element={<GameStartPage />} />
@@ -305,7 +359,7 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
-                        // cellColor={cellColor}
+
                         />}
                     />
                     <Route
@@ -319,7 +373,7 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
-                        // cellColor={cellColor}
+
                         />}
                     />
                     <Route
@@ -338,7 +392,7 @@ const GamesContainer = () => {
                     />
                     <Route path='/about' element={< About />} />
                 </Routes>
-                <Footer/>
+                <Footer />
             </Router>
         </MainContainer>
 
