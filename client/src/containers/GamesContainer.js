@@ -289,9 +289,13 @@ const GamesContainer = () => {
     ])
 
     useEffect(() => {
-        socket.on('recieve_player1', (data) => {
+        socket.on('receive_player1', (data) => {
             console.log("Data Received")
             setPlayerOneCells(data.newPlayerCells)
+        })
+        socket.on('receive_player2', (data) => {
+            console.log("Data Received")
+            setPlayerTwoCells(data.newPlayerCells)
         })
     }, [socket])
 
@@ -352,6 +356,7 @@ const GamesContainer = () => {
             }
         })
         setPlayerOneCells(newPlayerCells)
+        socket.emit('send_player1', { newPlayerCells })
         removeShipFromList(1)
     }
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
@@ -368,6 +373,7 @@ const GamesContainer = () => {
             }
         })
         setPlayerTwoCells(newPlayerCells)
+        socket.emit('send_player2', { newPlayerCells })
         removeShipFromList(2)
     }
     const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
@@ -383,6 +389,7 @@ const GamesContainer = () => {
             }
         })
         setPlayerTwoCells(newPlayerCells)
+        socket.emit('send_player2', { newPlayerCells })
         removeShipFromList(2)
     }
     const findShipById = (player, _shipId) => {
