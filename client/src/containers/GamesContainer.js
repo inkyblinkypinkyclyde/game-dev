@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import About from '../components/About';
@@ -8,8 +8,10 @@ import NavBar from '../components/NavBar';
 import GameStartPage from "../components/BattleshipsGame/GameStartPage.js";
 import PlayerOne from "../components/BattleshipsGame/PlayerOne.js";
 import PlayerTwo from "../components/BattleshipsGame/PlayerTwo.js";
+import io from 'socket.io-client'
 import Snake from '../components/SnakeGame/Snake';
 
+const socket = io.connect("http://localhost:3001")
 
 const GamesContainer = () => {
 
@@ -188,6 +190,33 @@ const GamesContainer = () => {
                 }
             ],
             horizontal: false
+        },
+        {
+            name: 'Cruiser',
+            _shipId: 13,
+            length: [
+                {
+                    _cellId: -120,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: -121,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: -122,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: -123,
+                    location: null,
+                    shotAt: false,
+                }
+            ],
+            horizontal: false
         }
     ])
     const [playerTwoShips, setPlayerTwoShips] = useState([
@@ -229,8 +258,43 @@ const GamesContainer = () => {
                 }
             ],
             horizontal: false
+        },
+        {
+            name: 'Cruiser',
+            _shipId: 23,
+            length: [
+                {
+                    _cellId: -220,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: -221,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: -222,
+                    location: null,
+                    shotAt: false,
+                },
+                {
+                    _cellId: -223,
+                    location: null,
+                    shotAt: false,
+                }
+            ],
+            horizontal: false
         }
     ])
+
+    useEffect(() => {
+        socket.on('recieve_player1', (data) => {
+            console.log("Data Received")
+            setPlayerOneCells(data.newPlayerCells)
+        })
+    }, [socket])
+
     const [playerOneActiveShip, setPlayerOneActiveShip] = useState(null)
     const [playerTwoActiveShip, setPlayerTwoActiveShip] = useState(null)
     const [gamePhase, setGamePhase] = useState(0)
@@ -240,7 +304,6 @@ const GamesContainer = () => {
         return (x + length <= width)
 
     }
-
     const canPlaceVerticalCheck = () => {
         return true
     }
@@ -253,11 +316,16 @@ const GamesContainer = () => {
                 }
             })
             setPlayerOneShips(newShipList)
+        } else {
+            playerTwoShips.map((shipInList) => {
+                if (shipInList != playerTwoActiveShip) {
+                    newShipList.push(shipInList)
+                }
+            })
+            setPlayerTwoShips(newShipList)
         }
     }
-
     const placeShipOnHorizontalPlayerOne = (clickedCell, width, shipLength) => {
-        console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
@@ -269,10 +337,10 @@ const GamesContainer = () => {
             }
         })
         setPlayerOneCells(newPlayerCells)
+        socket.emit('send_player1', { newPlayerCells })
         removeShipFromList(1)
     }
     const placeShipOnVerticalPlayerOne = (clickedCell, width, shipLength) => {
-        console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
@@ -284,6 +352,7 @@ const GamesContainer = () => {
             }
         })
         setPlayerOneCells(newPlayerCells)
+        removeShipFromList(1)
     }
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
@@ -299,6 +368,7 @@ const GamesContainer = () => {
             }
         })
         setPlayerTwoCells(newPlayerCells)
+        removeShipFromList(2)
     }
     const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
@@ -306,7 +376,6 @@ const GamesContainer = () => {
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
                 playerCell.value = 's'
-                // console.log(index)
                 newPlayerCells[index + 4].value = 's'
                 if (shipLength === 3) {
                     newPlayerCells[index + 8].value = 's'
@@ -314,14 +383,36 @@ const GamesContainer = () => {
             }
         })
         setPlayerTwoCells(newPlayerCells)
+        removeShipFromList(2)
+    }
+    const findShipById = (player, _shipId) => {
+        if (player === 1) {
+            const foundShip = playerOneShips.find(shipInArray => {
+                return shipInArray._shipId === _shipId
+            })
+            console.log(foundShip)
+            return foundShip
+        } else {
+            const foundShip = playerTwoShips.find(shipInArray => {
+                return shipInArray._shipId === _shipId
+            })
+            console.log(foundShip)
+            return foundShip
+        }
     }
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
         if (gamePhase === 0) {
-            if (id <= -100 && id >= -109) { setPlayerOneActiveShip(playerOneShips[0]) }
-            if (id <= -110 && id >= -119) { setPlayerOneActiveShip(playerOneShips[1]) }
-            if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(playerTwoShips[0]) }
-            if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(playerTwoShips[1]) }
+            if (id <= -100 && id >= -109) {
+                const foundShip = findShipById(1, 11)
+                // console.log(foundShip)
+                setPlayerOneActiveShip(foundShip)
+            }
+            if (id <= -110 && id >= -119) { setPlayerOneActiveShip(findShipById(1, 12)) }
+            if (id <= -120 && id >= -129) { setPlayerOneActiveShip(findShipById(1, 13)) }
+            if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(findShipById(2, 21)) }
+            if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(findShipById(2, 22)) }
+            if (id <= -220 && id >= -229) { setPlayerTwoActiveShip(findShipById(2, 23)) }
             if (playerOneActiveShip) {
                 if (playerOneActiveShip.horizontal) {
                     placeShipOnHorizontalPlayerOne(id, 4, playerOneActiveShip.length.length)
@@ -338,7 +429,6 @@ const GamesContainer = () => {
             }
         }
     }
-
     return (
         <MainContainer>
             <Router>
