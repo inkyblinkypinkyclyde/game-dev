@@ -59,7 +59,7 @@ const HomePage = () => {
               <GameDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed. Risus feugiat in ante metus dictum. Pellentesque habitant morbi tristique senectus et netus.</GameDescription>
               <Play>
                 <Link to='/about'>
-                  <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
+                  <CardButton>PLAY A GAME <i className='far fa-play-circle'/></CardButton>
                 </Link> 
               </Play>
             </div>  
