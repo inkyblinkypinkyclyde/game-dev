@@ -355,7 +355,6 @@ const GamesContainer = () => {
     }
 
     const canPlaceVerticalCheck = (index, height, length) => {
-        debugger
         const remaining = playerOneCells.length - index;
         const y = remaining % height;
         return (length - 1 > y)
@@ -385,8 +384,8 @@ const GamesContainer = () => {
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
-            
-               playerCell.value = 's'
+
+                playerCell.value = 's'
                 newPlayerCells[index + 1].value = 's'
                 if (shipLength === 3) {
                     newPlayerCells[index + 2].value = 's'
@@ -412,7 +411,7 @@ const GamesContainer = () => {
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(index, 4, shipLength)) {
-        
+
                 playerCell.value = 's'
                 newPlayerCells[index + 4].value = 's'
                 if (shipLength === 3) {
