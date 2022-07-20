@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 // import io from 'socket.io-client';
 
 // const socket = io.connect("http://localhost:3001")
@@ -46,15 +47,46 @@ const ChatBox = ({onMessageSubmit}) => {
 
     return (
         <>
-        <form onSubmit={handleFormSubmit}>
-            <input type="text" placeholder="Name..." value={name} onChange={handleNameChange}></input>
-            <input type="text" placeholder="Message..." value={text} onChange={handleTextChange}></input>
-            <input type="submit" value="Send Message"></input>
-        </form>
-        <h1>Message:</h1>
+        <Form onSubmit={handleFormSubmit}>
+            <Input type="text" placeholder="Name..." value={name} onChange={handleNameChange}></Input>
+            <Input type="text" placeholder="Message..." value={text} onChange={handleTextChange}></Input>
+            <Button type="submit" value="Send Message"></Button>
+        </Form>
         <ul>{}</ul>
         </>
     )
 }
+
+const Form = styled.form`
+margin-left:1rem;
+`
+
+const Input = styled.input`
+margin-left: 1rem;
+margin-top: 2rem;
+padding: 1rem;
+border-radius: 2px;
+cursor: text;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+padding: 12px 26px;
+font-size: 20px;
+`
+const Button = styled.input`
+margin-left:1rem;
+border-radius: 2px;
+cursor: pointer;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+padding: 12px 26px;
+font-size: 20px;
+&:hover {
+  transition: all 0.3s ease-out;
+  background-color: red;
+  color: white;
+}
+`
 
 export default ChatBox;

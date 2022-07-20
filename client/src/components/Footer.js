@@ -7,25 +7,22 @@ const Footer = () => {
     <FooterBox>
         <Row>
           <Column>
-            <Heading>Placeholder</Heading>
-            <FooterLink href="#">Placeholder</FooterLink>
-            <FooterLink href="#">Placeholder</FooterLink>
-            <FooterLink href="#">Placeholder</FooterLink>
-            <FooterLink href="#">Placeholder</FooterLink>
+            <Heading>Directory</Heading>
+            <FooterLink href="/">Home</FooterLink>
+            <FooterLink href="/about">About</FooterLink>
           </Column>
           <Column>
-            <Heading>Placeholder</Heading>
-            <FooterLink href="#">Placeholder</FooterLink>
-            <FooterLink href="#">Placeholder</FooterLink>
-            <FooterLink href="#">Placeholder</FooterLink>
-            <FooterLink href="#">Placeholder</FooterLink>
+            <Heading>Games</Heading>
+            <FooterLink href="/snake">Snake</FooterLink>
+            <FooterLink href="/whack">Whack-A-Mole</FooterLink>
+            <FooterLink href="/battleships/start">Battleship</FooterLink>
           </Column>
           <Column>
             <Heading>Contact Us</Heading>
             <FooterLink href="#">Jack Slater</FooterLink>
+            <FooterLink href="#">Calum Cook</FooterLink>
             <FooterLink href="#">Name</FooterLink>
-            <FooterLink href="#">Name</FooterLink>
-            <FooterLink href="#">Name</FooterLink>
+            <FooterLink href="#">Michael Lyon</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>
@@ -41,7 +38,7 @@ const Footer = () => {
 
    
 const FooterBox = styled.div`
-  background-color: dodgerblue;
+  background-color: #00BBF9;
   position: relative;
   width: 100%;
   margin-top: 3rem;

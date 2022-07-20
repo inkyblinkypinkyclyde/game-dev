@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import HomeVideo from "../static/videos/arcade.mp4"
@@ -10,8 +10,9 @@ import MessageList from "./MessageList"
 const socket = io.connect("http://localhost:3001")
 
 const HomePage = () => {
-  
-  const [messages, setMessages] = useState([])
+
+  const ref = useRef(null)
+  const [messages, setMessages] = useState([{name:"Admin", text: "Welcome to React'R'cade!"}])
   
   const addMessage = (submittedMessage) => {
     submittedMessage.id = Date.now();
@@ -24,13 +25,14 @@ const HomePage = () => {
       socket.on("receive_message", (data) => {
         console.log(`Message Received: ${data}`);
         if (data.updatedMessages !== messages)
-        setMessages(data.updatedMessages)
+          setMessages(data.updatedMessages)
         })
     }, [socket])
 
-  const messageList = messages.map(message => {
-    <p>{message.name}: {message.text}</p>
-  })
+
+  const handleScrollClick = () => {
+    ref.current?.scrollIntoView({behavior: 'smooth'});
+  }
 
   return (
     <div>
@@ -39,47 +41,45 @@ const HomePage = () => {
             <H1>REACT'R'CADE</H1>
             <P>Welcome!</P>
             <ButtonContainer>
-            <Link to='/about'>
-              <Button1>GET STARTED</Button1>
-            </Link>   
+            <Button1 onClick={handleScrollClick}>GET STARTED</Button1>
             <Link to='/about'> 
               <Button2>PLAY GAME <i className='far fa-play-circle'/></Button2>
             </Link>  
             </ButtonContainer>
         </VideoContainer>
-        <PreviewSection>
+        <PreviewSection ref={ref}>
           <PreviewHeader>Check out our featured Games!</PreviewHeader>
           <CardContainer>
             <GameImage src={placeholder}/>
             <div>
               <GameTitle>Battleship</GameTitle>
-              <GameDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed. Risus feugiat in ante metus dictum. Pellentesque habitant morbi tristique senectus et netus.</GameDescription>
+              <GameDescription>Battleship is the classic naval combat game that brings together competition, strategy, and excitement. In head-to-head battle, you search for the enemy s fleet of ships and destroy them one by one. No ship is safe in this game of stealth and suspense. Try to protect your own fleet while you annihilate your opponents.</GameDescription>
               <Play>
-                <Link to='/about'>
-                  <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
+                <Link to='/battleship'>
+                  <CardButton>PLAY A GAME <i className='far fa-play-circle'/></CardButton>
                 </Link> 
               </Play>
             </div>  
           </CardContainer>
           <CardContainer>
-            <GameImage src={placeholder}/>
+            <GameImage src="https://i.imgur.com/hmW2Leh.png"/>
             <div>
-              <GameTitle>Game</GameTitle>
-              <GameDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed. Risus feugiat in ante metus dictum. Pellentesque habitant morbi tristique senectus et netus.</GameDescription>
+              <GameTitle>Snake</GameTitle>
+              <GameDescription>Your goal is to move the snake around and eat as many red “food” blocks as possible. There is only one food block at any given time. When the food is eaten, the snake grows in length. If you hit the snake itself or the edge of the board, the game is over.</GameDescription>
               <Play>
-                <Link to='/about'>
+                <Link to='/snake'>
                   <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
                 </Link>
               </Play>
             </div>  
           </CardContainer>
           <CardContainer>
-            <GameImage src={placeholder}/>
+            <GameImageWAM src="https://i.imgur.com/O2UqN7m.jpg"/>
             <div>
-              <GameTitle>Game</GameTitle>
+              <GameTitle>Whack-A-Mole</GameTitle>
               <GameDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed. Risus feugiat in ante metus dictum. Pellentesque habitant morbi tristique senectus et netus.</GameDescription>
               <Play>
-                <Link to='/about'>
+                <Link to='/whack'>
                   <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
                 </Link>
               </Play>
@@ -87,8 +87,8 @@ const HomePage = () => {
           </CardContainer>
         </PreviewSection>
         <PreviewHeader>Chat with other users or leave a message!</PreviewHeader>
-        <ChatBox onMessageSubmit={(message) => addMessage(message)}/>
         <MessageList messages={messages}/>
+        <ChatBox onMessageSubmit={(message) => addMessage(message)}/>
     </div>
   )
 }
@@ -111,7 +111,7 @@ display:flex;
 flex-direction: row;
 width: 90%;
 margin-top:2rem;
-margin-inline:4rem;
+margin-left: 5rem;
 box-shadow: 0 6px 20px lightgray;
 border-radius: 10px;
 overflow: hidden;
@@ -127,6 +127,10 @@ flex-direction: column;
 const GameImage = styled.img`
 height:25%;
 width:25%;
+`
+const GameImageWAM = styled.img`
+height:57%;
+width:57%;
 `
 
 const Video = styled.video`
@@ -219,9 +223,6 @@ font-size: 20px;
 }
 `
 const Play = styled.div`
-display:flex;
-justify-content: flex-end;
-margin-top: 80px;
-margin-right: 30px;
+margin-left: 30px;
 `
 export default HomePage

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AudioControl from "./components/AudioControl";
-import GameContainer from "./containers/GameContainer";
-import DialogueCard from "./components/DialogueCard";
-import "./App.css";
+import GameContainer from "./GameContainer.js";
+import DialogueCard from "./DialogueCard.js";
+import "./whackApp.css";
 
 const App = () => {
   const [score, setScore] = useState(0);
@@ -61,7 +60,6 @@ const App = () => {
   return (
     <>
       <h1 className="title">Whack&nbsp;-&nbsp;A&nbsp;-&nbsp;Mole&nbsp;!</h1>
-      <AudioControl/>
       {getMainContent()}
       <p
         className="main-p"
