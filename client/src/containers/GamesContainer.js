@@ -443,7 +443,6 @@ const GamesContainer = () => {
                     placeShipOnVerticalPlayerTwo(id, 4, playerTwoActiveShip.length.length)
                 }
             }
-            // if (id)
         }
     }
     return (
