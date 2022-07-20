@@ -56,7 +56,7 @@ span{
     border-radius: 5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     display: flex;
 }
 `
@@ -67,7 +67,7 @@ justify-content:space-between;
 align-items: center;
 position: relative;
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     overflow: hidden;
     flex-direction:column;
     width: 100%;
