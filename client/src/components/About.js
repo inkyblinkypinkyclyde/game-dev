@@ -29,8 +29,8 @@ const About = () => {
                 <h1>New Game Suggestions</h1>
                 <p>If you would like to submit a suggestion for a future game, please submit your request below and we'll try to implement it in the future!</p>
                 <form>
-                    <input></input>
-                    <button>Submit</button>
+                    <Input></Input>
+                    <Button>Submit</Button>
                 </form>
                 <h1>Project Team</h1>
             </MainContainer>
@@ -71,6 +71,36 @@ const About = () => {
         </>
     )
 }
+
+const Form = styled.form`
+margin-left:1rem;
+`
+
+const Input = styled.input`
+padding: 1rem;
+border-radius: 2px;
+cursor: text;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+padding: 12px 26px;
+font-size: 20px;
+`
+const Button = styled.button`
+margin-left:1rem;
+border-radius: 2px;
+cursor: pointer;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+padding: 12px 26px;
+font-size: 20px;
+&:hover {
+  transition: all 0.3s ease-out;
+  background-color: red;
+  color: white;
+}
+`
 
 const MainContainer = styled.div`
 display:flex;

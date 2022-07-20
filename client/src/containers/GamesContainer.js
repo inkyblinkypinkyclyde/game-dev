@@ -289,8 +289,10 @@ const GamesContainer = () => {
         }
     ])
 
-    const [playerOneHits, setPLayerOneHits] = useState(0)
-    const [playerTwoHits, setPLayerTwoHits] = useState(0)
+
+
+    const [playerOneHits, setPlayerOneHits] = useState(9)
+    const [playerTwoHits, setPlayerTwoHits] = useState(9)
 
     useEffect(() => {
         socket.on('receive_player1', (data) => {
@@ -299,20 +301,37 @@ const GamesContainer = () => {
         socket.on('receive_player2', (data) => {
             setPlayerTwoCells(data.newPlayerCells)
         })
-    }, [socket])
-    
-    useEffect(() => {
         socket.on('receive_player1_ships', (data) => {
             setPlayerOneShips(data.newShipList)
         })
         socket.on('receive_player2_ships', (data) => {
             setPlayerTwoShips(data.newShipList)
         })
+        socket.on('receive_player1_hits', (data) => {
+            setPlayerOneShips(data.newShipList)
+        })
+        socket.on('receive_player2_hits', (data) => {
+            setPlayerTwoShips(data.newShipList)
+        })
+        socket.on('receive_gamephase', (data) => {
+            setGamePhase(data.phase)
+        })
     }, [socket])
 
     const [playerOneActiveShip, setPlayerOneActiveShip] = useState(null)
     const [playerTwoActiveShip, setPlayerTwoActiveShip] = useState(null)
     const [gamePhase, setGamePhase] = useState(0)
+
+
+
+    const registerHitOnPlayerOne = () => {
+        const newPlayerOneHits = playerOneHits++
+        setPlayerOneHits(newPlayerOneHits)
+    }
+    const registerHitOnPlayerTwo = () => {
+        const newPlayerTwoHits = playerOneHits++
+        setPlayerTwoHits(newPlayerTwoHits)
+    }
 
 
 
@@ -326,35 +345,35 @@ const GamesContainer = () => {
     const height = 4;
     const width = 4;
 
-    function remainingInRow(index, length) {
-        const fromStartOfRow = index % width;
-        const remaining = width - fromStartOfRow;
-        return remaining >= length;
-    }
+    // function remainingInRow(index, length) {
+    //     const fromStartOfRow = index % width;
+    //     const remaining = width - fromStartOfRow;
+    //     return remaining >= length;
+    // }
 
-    function remainingInColumn(index, length) {
-        const fromStartOfColumn = Math.floor(index / height);
-        const remaining = height - fromStartOfColumn;
-        return remaining >= length;
-    }
+    // function remainingInColumn(index, length) {
+    //     const fromStartOfColumn = Math.floor(index / height);
+    //     const remaining = height - fromStartOfColumn;
+    //     return remaining >= length;
+    // }
 
-    let index;
+    // let index;
 
-    index = grid.indexOf(7)
-    const canPlaceWidth3At7 = remainingInRow(index, 3);
-    console.log({ canPlaceWidth3At7 });
+    // index = grid.indexOf(7)
+    // const canPlaceWidth3At7 = remainingInRow(index, 3);
+    // console.log({ canPlaceWidth3At7 });
 
-    index = grid.indexOf(10)
-    const canPlaceWidth3At10 = remainingInRow(index, 3);
-    console.log({ canPlaceWidth3At10 });
+    // index = grid.indexOf(10)
+    // const canPlaceWidth3At10 = remainingInRow(index, 3);
+    // console.log({ canPlaceWidth3At10 });
 
-    index = grid.indexOf(3);
-    const canPlaceHeight3At3 = remainingInColumn(index, 3);
-    console.log({ canPlaceHeight3At3 })
+    // index = grid.indexOf(3);
+    // const canPlaceHeight3At3 = remainingInColumn(index, 3);
+    // console.log({ canPlaceHeight3At3 })
 
-    index = grid.indexOf(11);
-    const canPlaceHeight3At11 = remainingInColumn(index, 3);
-    console.log({ canPlaceHeight3At11 });
+    // index = grid.indexOf(11);
+    // const canPlaceHeight3At11 = remainingInColumn(index, 3);
+    // console.log({ canPlaceHeight3At11 });
 
 
     const canPlaceHorizontalCheck = (index, width, length) => {
@@ -363,12 +382,18 @@ const GamesContainer = () => {
     }
 
     const canPlaceVerticalCheck = (index, height, length) => {
-        const remaining = playerOneCells.length - index;
-        const y = remaining % height;
-        return (length - 1 > y)
+        console.log(index)
+        const x = ((height * height) - 1) - ((length - 1) * height)
+        return (index - 200 < x)
     }
 
-
+    const setGamePhaseToOne = () => {
+        console.log('here')
+        if (playerOneShips === [] && playerTwoShips === []) { setGamePhase(1) }
+        if (playerOneShips.length === 1 && playerTwoShips === []) { setGamePhase(1) }
+        if (playerOneShips === [] && playerTwoShips.length === 1) { setGamePhase(1) }
+        setGamePhase(1)
+    }
 
     const removeShipFromList = (player) => {
         const newShipList = []
@@ -406,7 +431,8 @@ const GamesContainer = () => {
                 }
 
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
-                    setGamePhase(1)
+                    console.log('now')
+                    setGamePhaseToOne()
                 }
 
                 setPlayerOneCells(newPlayerCells)
@@ -416,12 +442,13 @@ const GamesContainer = () => {
 
             }
         })
+        // 
     }
     const placeShipOnVerticalPlayerOne = (clickedCell, width, shipLength) => {
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(index, 4, shipLength)) {
-
+                console.log('here2')
                 playerCell.value = 's'
                 newPlayerCells[index + 4].value = 's'
                 if (shipLength === 3) {
@@ -433,7 +460,8 @@ const GamesContainer = () => {
                 }
 
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
-                    setGamePhase(1)
+                    console.log('now')
+                    setGamePhaseToOne()
                 }
 
                 setPlayerOneCells(newPlayerCells)
@@ -443,6 +471,7 @@ const GamesContainer = () => {
 
             }
         })
+        // setGamePhaseToOne()
     }
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
         // console.log(`ship length is:  ` + shipLength)
@@ -460,7 +489,8 @@ const GamesContainer = () => {
                 }
 
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
-                    setGamePhase(1)
+                    console.log('now')
+                    setGamePhaseToOne()
                 }
 
                 setPlayerTwoCells(newPlayerCells)
@@ -471,6 +501,7 @@ const GamesContainer = () => {
             }
 
         })
+        // setGamePhaseToOne()
     }
     const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
         // console.log(`ship length is:  ` + shipLength)
@@ -488,7 +519,8 @@ const GamesContainer = () => {
                 }
 
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
-                    setGamePhase(1)
+                    console.log('now')
+                    setGamePhaseToOne()
                 }
 
 
@@ -500,6 +532,7 @@ const GamesContainer = () => {
             }
 
         })
+        // setGamePhaseToOne()
     }
     const findShipById = (player, _shipId) => {
         if (player === 1) {
@@ -516,9 +549,8 @@ const GamesContainer = () => {
             return foundShip
         }
     }
-
     const takeShotAtPlayerOne = (id) => {
-        const newPlayerOneCells = playerOneCells.map((cell) => {
+        const newPlayerCells = playerOneCells.map((cell) => {
             const newCell = { ...cell }
             if (newCell._cellId === id) {
                 if (newCell.value === '_') {
@@ -530,11 +562,14 @@ const GamesContainer = () => {
             }
             return newCell
         })
-        setPlayerOneCells(newPlayerOneCells)
+        setPlayerOneCells(newPlayerCells)
+        socket.emit('send_player1', { newPlayerCells })
+        const phase = 2
+        setGamePhase(phase)
+        socket.emit('send_gamephase', { phase })
     }
-
     const takeShotAtPlayerTwo = (id) => {
-        const newPlayerTwoCells = playerTwoCells.map((cell) => {
+        const newPlayerCells = playerTwoCells.map((cell) => {
             const newCell = { ...cell }
             if (newCell._cellId === id) {
                 if (newCell.value === '_') {
@@ -546,7 +581,11 @@ const GamesContainer = () => {
             }
             return newCell
         })
-        setPlayerTwoCells(newPlayerTwoCells)
+        setPlayerTwoCells(newPlayerCells)
+        socket.emit('send_player2', { newPlayerCells })
+        const phase = 1
+        setGamePhase(phase)
+        socket.emit('send_gamephase', { phase })
     }
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
