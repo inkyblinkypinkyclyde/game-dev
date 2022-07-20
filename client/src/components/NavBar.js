@@ -21,9 +21,6 @@ const NavBar = () => {
                 <MenuLink to='/snake'>Snake</MenuLink>
                 <MenuLink to='/battleships/start'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
-                <SearchBar>
-                    <input type="text" placeholder="Search.." />
-                </SearchBar>
             </Menu>
         </Nav>
     )
@@ -90,8 +87,6 @@ font-weight: 700;
 &:hover {
     color: red;
 }
-`
-const SearchBar = styled.div`
 `
 
 const Logo = styled.a`
