@@ -35,8 +35,8 @@ const App = () => {
       case "start":
         return (
           <DialogueCard
-            title={"Welcome"}
-            content={"Lets play this awesome game."}
+            title={"How To Play"}
+            content={"There are nine holes in the play area top are filled with virtual moles, which pop up at random. Points are scored by whacking each mole as it appears. If the player does not click a mole within a certain time, it eventually sinks back into its hole with no score. After a designated time limit, the game ends, regardless of the player's score. The final score is based on the number of moles the player struck."}
             button={"Start Now"}
             buttonClick={gameStart}
           />
