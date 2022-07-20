@@ -43,8 +43,8 @@ const Snake = () => {
             setHighScore(applesCollected)
         };
         setSpeed(null)
-        setDirection([0, -1])
         setGameOver(true)
+        moveSnake(32)
     }
 
     const moveSnake = ({ keyCode }) => {
