@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import mole_img from "../img/mole.webp";
 import hit_img from "../img/bang.webp";
 import hole from "../img/hole.webp";
-import grass from "../img/grass.webp";
 
 
 function MoleHole({ molePopped, setScore }) {

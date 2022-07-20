@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AudioControl from "./components/AudioControl";
 import GameContainer from "./containers/GameContainer";
 import DialogueCard from "./components/DialogueCard";
-import "./App.css";
+import "./whackApp.css";
 
 const App = () => {
   const [score, setScore] = useState(0);
