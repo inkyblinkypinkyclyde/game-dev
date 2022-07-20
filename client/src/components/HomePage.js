@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import HomeVideo from "../static/videos/arcade.mp4"
@@ -10,7 +10,8 @@ import MessageList from "./MessageList"
 const socket = io.connect("http://localhost:3001")
 
 const HomePage = () => {
-  
+
+  const ref = useRef(null)
   const [messages, setMessages] = useState([])
   
   const addMessage = (submittedMessage) => {
@@ -32,6 +33,10 @@ const HomePage = () => {
     <p>{message.name}: {message.text}</p>
   })
 
+  const handleScrollClick = () => {
+    ref.current?.scrollIntoView({behavior: 'smooth'});
+  }
+
   return (
     <div>
         <VideoContainer>
@@ -39,15 +44,13 @@ const HomePage = () => {
             <H1>REACT'R'CADE</H1>
             <P>Welcome!</P>
             <ButtonContainer>
-            <Link to='/about'>
-              <Button1>GET STARTED</Button1>
-            </Link>   
+            <Button1 onClick={handleScrollClick}>GET STARTED</Button1>
             <Link to='/about'> 
               <Button2>PLAY GAME <i className='far fa-play-circle'/></Button2>
             </Link>  
             </ButtonContainer>
         </VideoContainer>
-        <PreviewSection>
+        <PreviewSection ref={ref}>
           <PreviewHeader>Check out our featured Games!</PreviewHeader>
           <CardContainer>
             <GameImage src={placeholder}/>
