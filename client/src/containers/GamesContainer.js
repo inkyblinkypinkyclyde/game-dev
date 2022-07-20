@@ -299,6 +299,7 @@ const GamesContainer = () => {
             setPlayerTwoCells(data.newPlayerCells)
         })
     }, [socket])
+    
     useEffect(() => {
         socket.on('receive_player1_ships', (data) => {
             setPlayerOneShips(data.newShipList)
