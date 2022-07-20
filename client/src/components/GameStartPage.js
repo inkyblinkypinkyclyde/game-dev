@@ -1,21 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
 
-const Header = styled.h1`
-overflow: hidden;
-background-color: #f1f1f1;
-padding: 20px 10px;
-`
-const Section = styled.h3`
-overflow: hidden;
-background-color: #f1f1f1;
-padding: 20px 10px;
-`
-const History = styled.h3`
-overflow: hidden;
-background-color: #f1f1f1;
-padding: 20px 10px;
-`
+
+
 
 const GameStartPage = () => {
     return (
