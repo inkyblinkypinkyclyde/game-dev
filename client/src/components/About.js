@@ -6,7 +6,26 @@ const About = () => {
         <>
             <MainContainer>
                 <h1>About the Project</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut consequat semper viverra nam libero justo laoreet sit amet. Nisl pretium fusce id velit ut tortor pretium. Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Fermentum iaculis eu non diam. Sodales ut eu sem integer vitae justo eget. Orci sagittis eu volutpat odio facilisis. Non sodales neque sodales ut etiam sit. Cras semper auctor neque vitae tempus quam. Mi bibendum neque egestas congue. Eu volutpat odio facilisis mauris sit amet massa. Vestibulum sed arcu non odio euismod. Rutrum tellus pellentesque eu tincidunt tortor aliquam. Sed lectus vestibulum mattis ullamcorper velit. Urna et pharetra pharetra massa massa. Mauris augue neque gravida in fermentum et sollicitudin ac. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien. Nec dui nunc mattis enim ut tellus.</p>
+                <p>
+                   The project team are all CodeClan students who were assigned together to choose a project which was to completed in 6 days, the group decided to pick a browser game
+                   project. This browser game had to be based on an existing card or dice game. We were tasked with being able to model and test the game
+                   logic and the display it in the browser for a user to interact with. 
+                </p>   
+                <p>
+                    The browser game we decided on was Battleships portrayed in an arcade themed website.
+                    We decided on our MVP (minimum viable product) with extensions (bonuses)
+                    for the project. These objectives (MVP) were to play a Battleships Game against a computer or
+                    another player and track hits and ships destroyed in each game. 
+                    Our extra objectives (extensions) were to be able to record scores by having a leaderboard, make a game have multiplayer capabilty from different machines
+                    include a message board on the website, add animations to Battleships and add extra games to the website.
+                    The group planned by using a website called Trello to list ideas and to assign tasks to each group member. 
+                    Each person within the group has gained valueable skills within software development such as react, socket, styled-components and using github branches.
+                </p>
+                
+                
+                   
+                
+                
                 <h1>New Game Suggestions</h1>
                 <p>If you would like to submit a suggestion for a future game, please submit your request below and we'll try to implement it in the future!</p>
                 <form>
