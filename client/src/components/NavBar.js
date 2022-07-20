@@ -19,6 +19,7 @@ const NavBar = () => {
             <Menu styling={styling}>
                 <MenuLink to='/'>Home</MenuLink>
                 <MenuLink to='/snake'>Snake</MenuLink>
+                <MenuLink to='/whack'>Whack</MenuLink>
                 <MenuLink to='/battleships/start'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
             </Menu>

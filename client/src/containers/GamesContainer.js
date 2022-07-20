@@ -10,6 +10,7 @@ import PlayerOne from "../components/BattleshipsGame/PlayerOne.js";
 import PlayerTwo from "../components/BattleshipsGame/PlayerTwo.js";
 import io from 'socket.io-client'
 import Snake from '../components/SnakeGame/Snake';
+import Whack from '../components/WhackGame/App';
 
 const socket = io.connect("http://localhost:3001")
 
@@ -593,6 +594,7 @@ const GamesContainer = () => {
 
                     <Route path='/' element={<HomePage />} />
                     <Route path="/snake" element={<Snake />} />
+                    <Route path="/whack" element={<Whack />} />
                     <Route path='/battleships/start/' element={<GameStartPage />} />
                     <Route
                         path='/battleships/player_one'
