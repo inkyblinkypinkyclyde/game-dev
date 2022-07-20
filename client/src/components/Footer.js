@@ -23,7 +23,7 @@ const Footer = () => {
           <Column>
             <Heading>Contact Us</Heading>
             <FooterLink href="#">Jack Slater</FooterLink>
-            <FooterLink href="#">Name</FooterLink>
+            <FooterLink href="#">Calum Cook</FooterLink>
             <FooterLink href="#">Name</FooterLink>
             <FooterLink href="#">Michael Lyon</FooterLink>
           </Column>
