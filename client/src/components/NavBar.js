@@ -18,14 +18,13 @@ const NavBar = () => {
             </Hamburger>
             <Menu styling={styling}>
                 <MenuLink to='/'>Home</MenuLink>
+                <MenuLink to='/snake'>Snake</MenuLink>
                 <MenuLink to='/battleships/start'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
                 <SearchBar>
                     <input type="text" placeholder="Search.." />
                 </SearchBar>
             </Menu>
-
-
         </Nav>
     )
 }

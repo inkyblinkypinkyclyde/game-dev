@@ -11,6 +11,9 @@ const GameStartPage = () => {
             <Link to='/battleships/player_two'>
                 <button>PLAYER TWO <i className='far fa-play-circle'/></button>
             </Link>
+            <Link to='/battleships/computer'>
+                <button>PLAYER TWO <i className='far fa-play-circle'/></button>
+            </Link>
         </>   
     )
 }

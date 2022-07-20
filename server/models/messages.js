@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+// import mongoose from "mongoose";
+// const { Schema } = mongoose;
 
-const messageSchema = new Schema({
-    name: {
-        type: String,
-    },
-    text: {
-        type: String,
-    },
-  }   
-)
+// const messageSchema = new Schema({
+//     name: {
+//         type: String,
+//     },
+//     text: {
+//         type: String,
+//     },
+//   }   
+// )
 
-module.exports = mongoose.model('message', messageSchema);
+// module.exports = mongoose.model('message', messageSchema);

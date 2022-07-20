@@ -8,6 +8,7 @@ import NavBar from '../components/NavBar';
 import GameStartPage from "../components/BattleshipsGame/GameStartPage.js";
 import PlayerOne from "../components/BattleshipsGame/PlayerOne.js";
 import PlayerTwo from "../components/BattleshipsGame/PlayerTwo.js";
+import Snake from '../components/SnakeGame/Snake';
 
 
 const GamesContainer = () => {
@@ -291,10 +292,25 @@ const GamesContainer = () => {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<HomePage/>} />
+                    <Route path="/snake" element={<Snake/>}/>
                     <Route path='/battleships/start/' element={<GameStartPage />} />
                     <Route
                         path='/battleships/player_one'
                         element={<PlayerOne
+                            playerOneShips={playerOneShips}
+                            playerOneActiveShip={playerOneActiveShip}
+                            playerOneCells={playerOneCells}
+                            playerTwoShips={playerTwoShips}
+                            playerTwoActiveShip={playerTwoActiveShip}
+                            playerTwoCells={playerTwoCells}
+                            gamePhase={gamePhase}
+                            clickHandler={clickHandler}
+                        // cellColor={cellColor}
+                        />}
+                    />
+                    <Route
+                        path='/battleships/player_two'
+                        element={<PlayerTwo
                             playerOneShips={playerOneShips}
                             playerOneActiveShip={playerOneActiveShip}
                             playerOneCells={playerOneCells}
