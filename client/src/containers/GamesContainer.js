@@ -288,6 +288,9 @@ const GamesContainer = () => {
         }
     ])
 
+    const [playerOneHits, setPLayerOneHits] = useState(0)
+    const [playerTwoHits, setPLayerTwoHits] = useState(0)
+
     useEffect(() => {
         socket.on('receive_player1', (data) => {
             console.log("Data Received")
@@ -364,14 +367,14 @@ const GamesContainer = () => {
         const newShipList = []
         if (player === 1) {
             playerOneShips.map((shipInList) => {
-                if (shipInList != playerOneActiveShip) {
+                if (shipInList !== playerOneActiveShip) {
                     newShipList.push(shipInList)
                 }
             })
             setPlayerOneShips(newShipList)
         } else {
             playerTwoShips.map((shipInList) => {
-                if (shipInList != playerTwoActiveShip) {
+                if (shipInList !== playerTwoActiveShip) {
                     newShipList.push(shipInList)
                 }
             })
@@ -392,10 +395,16 @@ const GamesContainer = () => {
                     newPlayerCells[index + 2].value = 's'
                     newPlayerCells[index + 3].value = 's'
                 }
+
+                if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
+                    setGamePhase(1)
+                }
+
                 setPlayerOneCells(newPlayerCells)
                 socket.emit('send_player1', { newPlayerCells })
                 removeShipFromList(1)
                 setPlayerOneActiveShip(null)
+
             }
         })
     }
@@ -413,10 +422,16 @@ const GamesContainer = () => {
                     newPlayerCells[index + 8].value = 's'
                     newPlayerCells[index + 12].value = 's'
                 }
+
+                if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
+                    setGamePhase(1)
+                }
+
                 setPlayerOneCells(newPlayerCells)
                 socket.emit('send_player1', { newPlayerCells })
                 removeShipFromList(1)
                 setPlayerOneActiveShip(null)
+
             }
         })
     }
@@ -434,11 +449,18 @@ const GamesContainer = () => {
                     newPlayerCells[index + 3].value = 's'
                     newPlayerCells[index + 2].value = 's'
                 }
+
+                if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
+                    setGamePhase(1)
+                }
+
                 setPlayerTwoCells(newPlayerCells)
                 socket.emit('send_player2', { newPlayerCells })
                 removeShipFromList(2)
                 setPlayerTwoActiveShip(null)
+
             }
+
         })
     }
     const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
@@ -456,11 +478,18 @@ const GamesContainer = () => {
                     newPlayerCells[index + 12].value = 's'
                 }
 
+                if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
+                    setGamePhase(1)
+                }
+
+
                 setPlayerTwoCells(newPlayerCells)
                 socket.emit('send_player2', { newPlayerCells })
                 removeShipFromList(2)
                 setPlayerTwoActiveShip(null)
+
             }
+
         })
     }
     const findShipById = (player, _shipId) => {
@@ -478,19 +507,50 @@ const GamesContainer = () => {
             return foundShip
         }
     }
+
+    const takeShotAtPlayerOne = (id) => {
+        const newPlayerOneCells = playerOneCells.map((cell) => {
+            const newCell = { ...cell }
+            if (newCell._cellId === id) {
+                if (newCell.value === '_') {
+                    newCell.value = 'm'
+                }
+                if (newCell.value === 's') {
+                    newCell.value = 'h'
+                }
+            }
+            return newCell
+        })
+        setPlayerOneCells(newPlayerOneCells)
+    }
+
+    const takeShotAtPlayerTwo = (id) => {
+        const newPlayerTwoCells = playerTwoCells.map((cell) => {
+            const newCell = { ...cell }
+            if (newCell._cellId === id) {
+                if (newCell.value === '_') {
+                    newCell.value = 'm'
+                }
+                if (newCell.value === 's') {
+                    newCell.value = 'h'
+                }
+            }
+            return newCell
+        })
+        setPlayerTwoCells(newPlayerTwoCells)
+    }
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
         if (gamePhase === 0) {
             if (id <= -100 && id >= -109) {
                 const foundShip = findShipById(1, 11)
-                // console.log(foundShip)
                 setPlayerOneActiveShip(foundShip)
             }
-            if (id <= -110 && id >= -119) { setPlayerOneActiveShip(findShipById(1, 12)) }
-            if (id <= -120 && id >= -129) { setPlayerOneActiveShip(findShipById(1, 13)) }
-            if (id <= -200 && id >= -209) { setPlayerTwoActiveShip(findShipById(2, 21)) }
-            if (id <= -210 && id >= -219) { setPlayerTwoActiveShip(findShipById(2, 22)) }
-            if (id <= -220 && id >= -229) { setPlayerTwoActiveShip(findShipById(2, 23)) }
+            if (id <= -110 && id >= -119 && gamePhase === 0) { setPlayerOneActiveShip(findShipById(1, 12)) }
+            if (id <= -120 && id >= -129 && gamePhase === 0) { setPlayerOneActiveShip(findShipById(1, 13)) }
+            if (id <= -200 && id >= -209 && gamePhase === 0) { setPlayerTwoActiveShip(findShipById(2, 21)) }
+            if (id <= -210 && id >= -219 && gamePhase === 0) { setPlayerTwoActiveShip(findShipById(2, 22)) }
+            if (id <= -220 && id >= -229 && gamePhase === 0) { setPlayerTwoActiveShip(findShipById(2, 23)) }
             if (playerOneActiveShip) {
                 if (playerOneActiveShip.horizontal) {
                     placeShipOnHorizontalPlayerOne(id, 4, playerOneActiveShip.length.length)
@@ -504,6 +564,17 @@ const GamesContainer = () => {
                 } else {
                     placeShipOnVerticalPlayerTwo(id, 4, playerTwoActiveShip.length.length)
                 }
+            }
+        } else {
+            if (gamePhase === 1) {
+                //player one turn
+                takeShotAtPlayerTwo(id)
+                setGamePhase(2)
+            }
+            if (gamePhase === 2) {
+                //player two turn
+                takeShotAtPlayerOne(id)
+                setGamePhase(1)
             }
         }
     }
