@@ -24,6 +24,7 @@ const PlayerOne = ({
                 playerCells={playerOneCells}
                 clickHandler={clickHandler}
             />
+            <ReadyButton />
             <PlayerShips
                 playerShips={true}
                 playerOneShips={playerOneShips}
