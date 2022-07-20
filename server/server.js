@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
     socket.on("send_message", (data) => {
-      socket.broadcast.emit("receive_message", data)  
+        socket.broadcast.emit("receive_message", data)
     })
 
     socket.on("send_player1", (data) => {
@@ -43,7 +43,16 @@ io.on("connection", (socket) => {
     socket.on("send_player2_ships", (data) => {
         socket.broadcast.emit("receive_player2_ships", data)
     })
-  })
+    socket.on("send_player1_hits", (data) => {
+        socket.broadcast.emit("receive_player1_hits", data)
+    })
+    socket.on("send_player2_hits", (data) => {
+        socket.broadcast.emit("receive_player2_hits", data)
+    })
+    socket.on("send_gamephase", (data) => {
+        socket.broadcast.emit("receive_gamephase", data)
+    })
+})
 
 server.listen(3001, () => {
     console.log("SERVER IS RUNNING");
