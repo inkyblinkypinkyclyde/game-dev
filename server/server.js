@@ -29,20 +29,21 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+    console.log(`User Connected: ${socket.id}`);
 
-  socket.on("send_message", (data) => {
-    // const dbMessage = new Message({data});
-    // dbMessage.save().then(() => {
-    socket.broadcast.emit("receive_message", data)
+    socket.on("send_message", (data) => {
+      // const dbMessage = new Message({data});
+      // dbMessage.save().then(() => {
+      socket.broadcast.emit("receive_message", data)
+      
+    })
+    socket.on("send_player1", (data) => {
+        socket.broadcast.emit("receive_player1", data)
+    })
+    socket.on("send_player2", (data) => {
+        socket.broadcast.emit("receive_player2", data)
+    })
   })
-
-  socket.on("send_player1", (data) => {
-    console.log("data sent")
-    socket.broadcast.emit("receive_player1", data)
-  })
-})
-
 
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING");
