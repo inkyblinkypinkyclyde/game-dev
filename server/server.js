@@ -43,6 +43,12 @@ io.on("connection", (socket) => {
     socket.on("send_player2", (data) => {
         socket.broadcast.emit("receive_player2", data)
     })
+    socket.on("send_player1_ships", (data) => {
+        socket.broadcast.emit("receive_player1_ships", data)
+    })
+    socket.on("send_player2_ships", (data) => {
+        socket.broadcast.emit("receive_player2_ships", data)
+    })
   })
 
 server.listen(3001, () => {
