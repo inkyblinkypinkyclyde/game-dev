@@ -44,11 +44,11 @@ const About = () => {
                     </IconsDiv>
                 </Member>
                 <Member>
-                    <Image src={avatar}></Image>
-                    <h2>Name</h2>
+                    <Image src="https://media-exp1.licdn.com/dms/image/C4E03AQG9F9TtcO8QEQ/profile-displayphoto-shrink_100_100/0/1618850793555?e=1663804800&v=beta&t=glNmSX4VeEPSsYdmOV8BwClNhw8fw2lpl5j0W0oSysg"></Image>
+                    <h2>Caulm Cook</h2>
                     <IconsDiv>
-                        <Github href=""><i className="fa fa-github icon fa-3x"></i></Github>
-                        <LinkedIn href=""><i className="fa fa-linkedin icon fa-3x"></i></LinkedIn>
+                        <Github href="https://github.com/DonutsGoHere"><i className="fa fa-github icon fa-3x"></i></Github>
+                        <LinkedIn href="https://linkedin.com/in/calum-cook89"><i className="fa fa-linkedin icon fa-3x"></i></LinkedIn>
                     </IconsDiv>
                 </Member>
                 <Member>
