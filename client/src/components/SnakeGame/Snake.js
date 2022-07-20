@@ -118,7 +118,10 @@ const Snake = () => {
                 <P><Apple className="fa fa-square-full"></Apple> {applesCollected}</P>
                 <P><Trophy className="fa-solid fa-trophy"></Trophy> {highScore}</P>
             </Header>
-            <Game role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
+            <Game role="button" tabIndex="0" onKeyDown={e => {
+                moveSnake(e)
+                e.preventDefault()
+                }}>
                 <Canvas style={{border: "2px solid black"}} ref={canvasRef} width={`${CANVAS_SIZE[0]}px`} height={`${CANVAS_SIZE[1]}px`}/>
                 <Container>
                     <Button onClick={startGame}>Start Game</Button>

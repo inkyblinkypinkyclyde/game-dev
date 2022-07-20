@@ -25,7 +25,7 @@ const Footer = () => {
             <FooterLink href="#">Jack Slater</FooterLink>
             <FooterLink href="#">Name</FooterLink>
             <FooterLink href="#">Name</FooterLink>
-            <FooterLink href="#">Name</FooterLink>
+            <FooterLink href="#">Michael Lyon</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>

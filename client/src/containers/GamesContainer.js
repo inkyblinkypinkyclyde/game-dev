@@ -306,14 +306,63 @@ const GamesContainer = () => {
     const [playerTwoActiveShip, setPlayerTwoActiveShip] = useState(null)
     const [gamePhase, setGamePhase] = useState(0)
 
+
+
+    const grid = [
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16
+    ];
+
+    const height = 4;
+    const width = 4;
+
+    function remainingInRow(index, length) {
+        const fromStartOfRow = index % width;
+        const remaining = width - fromStartOfRow;
+        return remaining >= length;
+    }
+
+    function remainingInColumn(index, length) {
+        const fromStartOfColumn = Math.floor(index / height);
+        const remaining = height - fromStartOfColumn;
+        return remaining >= length;
+    }
+
+    let index;
+
+    index = grid.indexOf(7)
+    const canPlaceWidth3At7 = remainingInRow(index, 3);
+    console.log({ canPlaceWidth3At7 });
+
+    index = grid.indexOf(10)
+    const canPlaceWidth3At10 = remainingInRow(index, 3);
+    console.log({ canPlaceWidth3At10 });
+
+    index = grid.indexOf(3);
+    const canPlaceHeight3At3 = remainingInColumn(index, 3);
+    console.log({ canPlaceHeight3At3 })
+
+    index = grid.indexOf(11);
+    const canPlaceHeight3At11 = remainingInColumn(index, 3);
+    console.log({ canPlaceHeight3At11 });
+
+
     const canPlaceHorizontalCheck = (index, width, length) => {
         const x = index % width;
         return (x + length <= width)
+    }
 
+    const canPlaceVerticalCheck = (index, height, length) => {
+        debugger
+        const remaining = playerOneCells.length - index;
+        const y = remaining % height;
+        return (length - 1 > y)
     }
-    const canPlaceVerticalCheck = () => {
-        return true
-    }
+
+
+
     const removeShipFromList = (player) => {
         const newShipList = []
         if (player === 1) {
@@ -336,7 +385,8 @@ const GamesContainer = () => {
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
-                playerCell.value = 's'
+            
+               playerCell.value = 's'
                 newPlayerCells[index + 1].value = 's'
                 if (shipLength === 3) {
                     newPlayerCells[index + 2].value = 's'
@@ -345,19 +395,24 @@ const GamesContainer = () => {
                     newPlayerCells[index + 2].value = 's'
                     newPlayerCells[index + 3].value = 's'
                 }
+
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
                     setGamePhase(1)
                 }
+
+                setPlayerOneCells(newPlayerCells)
+                socket.emit('send_player1', { newPlayerCells })
+                removeShipFromList(1)
+                setPlayerOneActiveShip(null)
+
             }
         })
-        setPlayerOneCells(newPlayerCells)
-        socket.emit('send_player1', { newPlayerCells })
-        removeShipFromList(1)
     }
     const placeShipOnVerticalPlayerOne = (clickedCell, width, shipLength) => {
         const newPlayerCells = [...playerOneCells]
         newPlayerCells.forEach((playerCell, index) => {
-            if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
+            if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(index, 4, shipLength)) {
+        
                 playerCell.value = 's'
                 newPlayerCells[index + 4].value = 's'
                 if (shipLength === 3) {
@@ -367,14 +422,18 @@ const GamesContainer = () => {
                     newPlayerCells[index + 8].value = 's'
                     newPlayerCells[index + 12].value = 's'
                 }
+
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
                     setGamePhase(1)
                 }
+
+                setPlayerOneCells(newPlayerCells)
+                socket.emit('send_player1', { newPlayerCells })
+                removeShipFromList(1)
+                setPlayerOneActiveShip(null)
+
             }
         })
-        setPlayerOneCells(newPlayerCells)
-        socket.emit('send_player1', { newPlayerCells })
-        removeShipFromList(1)
     }
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
@@ -390,15 +449,19 @@ const GamesContainer = () => {
                     newPlayerCells[index + 3].value = 's'
                     newPlayerCells[index + 2].value = 's'
                 }
+
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
                     setGamePhase(1)
                 }
+
+                setPlayerTwoCells(newPlayerCells)
+                socket.emit('send_player2', { newPlayerCells })
+                removeShipFromList(2)
+                setPlayerTwoActiveShip(null)
+
             }
 
         })
-        setPlayerTwoCells(newPlayerCells)
-        socket.emit('send_player2', { newPlayerCells })
-        removeShipFromList(2)
     }
     const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
         console.log(`ship length is:  ` + shipLength)
@@ -414,15 +477,20 @@ const GamesContainer = () => {
                     newPlayerCells[index + 8].value = 's'
                     newPlayerCells[index + 12].value = 's'
                 }
+
                 if (playerOneShips.length <= 1 && playerTwoShips <= 1) {
                     setGamePhase(1)
                 }
+
+
+                setPlayerTwoCells(newPlayerCells)
+                socket.emit('send_player2', { newPlayerCells })
+                removeShipFromList(2)
+                setPlayerTwoActiveShip(null)
+
             }
 
         })
-        setPlayerTwoCells(newPlayerCells)
-        socket.emit('send_player2', { newPlayerCells })
-        removeShipFromList(2)
     }
     const findShipById = (player, _shipId) => {
         if (player === 1) {
