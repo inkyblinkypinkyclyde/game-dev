@@ -9,6 +9,8 @@ const PlayerTwo = ({
     playerTwoShips,
     playerTwoCells,
     clickHandler,
+    readyState,
+    handleReadyButton,
     gamePhase }
 ) => {
     return (
@@ -26,7 +28,8 @@ const PlayerTwo = ({
                 clickHandler={clickHandler}
             />
             <ReadyButton
-                clickHandler={ }
+                readyState={readyState}
+                handleReadyButton={handleReadyButton}
             />
             <PlayerShips
                 playerShips={false}

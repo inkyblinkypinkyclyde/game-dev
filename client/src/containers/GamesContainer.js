@@ -289,7 +289,7 @@ const GamesContainer = () => {
         }
     ])
 
-
+    const [playersReady, setPlayersReady] = useState(false)
 
     const [playerOneHits, setPlayerOneHits] = useState(9)
     const [playerTwoHits, setPlayerTwoHits] = useState(9)
@@ -325,8 +325,6 @@ const GamesContainer = () => {
         // setGamePhaseToOne()
         if (playerOneShips.length === 0 && playerTwoShips.length === 0) { setGamePhase(1) }
     }, [playerTwoShips, playerOneShips])
-
-
 
 
     const [playerOneActiveShip, setPlayerOneActiveShip] = useState(null)
@@ -575,7 +573,7 @@ const GamesContainer = () => {
         })
         setPlayerOneCells(newPlayerCells)
         socket.emit('send_player1', { newPlayerCells })
-        const phase = 2
+        const phase = 1
         setGamePhase(phase)
         socket.emit('send_gamephase', { phase })
     }
@@ -594,10 +592,20 @@ const GamesContainer = () => {
         })
         setPlayerTwoCells(newPlayerCells)
         socket.emit('send_player2', { newPlayerCells })
-        const phase = 1
+        const phase = 2
         setGamePhase(phase)
         socket.emit('send_gamephase', { phase })
     }
+
+    const handleReadyButton = () => {
+        console.log('pressed button')
+        if (playerOneCells.length === 0)
+        setPlayerOneCells([])
+        if (playerTwoCells.length === 0)
+        setPlayerTwoCells([])
+
+    }
+
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
         if (gamePhase === 0) {
@@ -630,8 +638,9 @@ const GamesContainer = () => {
                 takeShotAtPlayerTwo(id)
                 setGamePhase(2)
             }
-            if (gamePhase === 2 && id >= 100 && id >= 199) {
+            if (gamePhase === 2 && id >= 100 && id <= 199) {
                 //player two turn
+                console.log('shot fired from player one to player two')
                 takeShotAtPlayerOne(id)
                 setGamePhase(1)
             }
@@ -658,9 +667,10 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
-
-                        />}
-                    />
+                            handleReadyButton={handleReadyButton}
+                            
+                            />}
+                            />
                     <Route
                         path='/battleships/player_two'
                         element={<PlayerTwo
@@ -672,6 +682,7 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
+                            handleReadyButton={handleReadyButton}
 
                         />}
                     />
