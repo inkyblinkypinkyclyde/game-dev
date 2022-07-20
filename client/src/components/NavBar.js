@@ -19,7 +19,7 @@ const NavBar = () => {
             <Menu styling={styling}>
                 <MenuLink to='/'>Home</MenuLink>
                 <MenuLink to='/snake'>Snake</MenuLink>
-                <MenuLink to='/whack'>Whack</MenuLink>
+                <MenuLink to='/whack'>Whack-A-Mole</MenuLink>
                 <MenuLink to='/battleships/start'>Battleships</MenuLink>
                 <MenuLink to='/about'>About</MenuLink>
             </Menu>
@@ -56,7 +56,7 @@ span{
     border-radius: 5px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     display: flex;
 }
 `
@@ -67,11 +67,11 @@ justify-content:space-between;
 align-items: center;
 position: relative;
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     overflow: hidden;
     flex-direction:column;
     width: 100%;
-    max-height: ${({styling}) => (styling ? "300px" : "0")};
+    max-height: ${({styling}) => (styling ? "400px" : "0")};
     transition: max-height 0.3s ease-in;
 }
 `

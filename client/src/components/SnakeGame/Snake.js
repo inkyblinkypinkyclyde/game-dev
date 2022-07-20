@@ -19,6 +19,8 @@ const DIRECTIONS = {
 
 const Snake = () => {
     
+    const ref = useRef(null)
+
     const canvasRef = useRef()
     const [snake, setSnake] = useState(SNAKE_START)
     const [apple, setApple] = useState(APPLE_START)
@@ -112,23 +114,35 @@ const Snake = () => {
 
     useInterval(() => gameLoop(), speed);
 
+    const handleScrollClick = () => {
+        ref.current?.scrollIntoView({behavior: 'smooth'});
+      }
+
     return (
-        <Container>
+        <div>
             <Header>
-                <P><Apple className="fa fa-square-full"></Apple> {applesCollected}</P>
-                <P><Trophy className="fa-solid fa-trophy"></Trophy> {highScore}</P>
+                <h1>Snake</h1>
+                <p>Your goal is to move the snake around and eat as many red “food” blocks as possible. There is only one food block at any given time. When the food is eaten, the snake grows in length. If you hit the snake itself or the edge of the board, the game is over.</p>
+                <p>Use the arrow keys on your keyboard to control the snakes movements.</p>
+                <CardButton onClick={handleScrollClick}>Focus on Game!</CardButton>
             </Header>
-            <Game role="button" tabIndex="0" onKeyDown={e => {
-                moveSnake(e)
-                e.preventDefault()
-                }}>
-                <Canvas style={{border: "2px solid black"}} ref={canvasRef} width={`${CANVAS_SIZE[0]}px`} height={`${CANVAS_SIZE[1]}px`}/>
-                <Container>
-                    <Button onClick={startGame}>Start Game</Button>
-                    {gameOver && <P>GAME OVER!</P>}
-                </Container>
-            </Game>
-        </Container>
+            <Container ref={ref}>
+                <Scores>
+                    <P><Apple className="fa fa-square-full"></Apple> {applesCollected}</P>
+                    <P><Trophy className="fa-solid fa-trophy"></Trophy> {highScore}</P>
+                </Scores>
+                <Game role="button" tabIndex="0" onKeyDown={e => {
+                    moveSnake(e)
+                    e.preventDefault()
+                    }}>
+                    <Canvas style={{border: "2px solid black"}} ref={canvasRef} width={`${CANVAS_SIZE[0]}px`} height={`${CANVAS_SIZE[1]}px`}/>
+                    <Container>
+                        <Button onClick={startGame}>Start Game</Button>
+                        {gameOver && <P>GAME OVER!</P>}
+                    </Container>
+                </Game>
+            </Container>
+        </div>            
     )
 }
 
@@ -158,13 +172,29 @@ width: 10rem;
 height: 3rem;
 margin-left: 2rem;
 margin-right: 2rem;
+border-radius: 2px;
+cursor: pointer;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+font-size: 20px;
+&:hover {
+    transition: all 0.3s ease-out;
+    background-color: red;
+    color: white;
 `
 
-const Header = styled.div`
+const Scores = styled.div`
 background-color: lightgray;
 width: 1028px;
 display: flex;
 justify-content: space-evenly;
+`
+
+const Header = styled.div`
+display: flex;
+flex-direction: column;
+align-items:center;
 `
 
 const Apple = styled.i`
@@ -173,6 +203,22 @@ color: red;
 
 const Trophy = styled.i`
 color: yellow;
+`
+
+const CardButton = styled.button`
+padding: 12px;
+border-radius: 2px;
+cursor: pointer;
+background-color: white;
+color: #242424;
+border: 1px solid Black;
+padding: 12px 26px;
+font-size: 20px;
+&:hover {
+  transition: all 0.3s ease-out;
+  background-color: red;
+  color: white;
+}
 `
 
 export default Snake;

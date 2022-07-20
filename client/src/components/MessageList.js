@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import Message from "./Message";
 
 const MessageList = ({messages}) => {
@@ -10,10 +11,15 @@ const MessageList = ({messages}) => {
     })
 
     return (
-        <>
+        <StyledMessageList>
             {messageNodes}
-        </>
+        </StyledMessageList>
     )
 }
+
+const StyledMessageList = styled.div`
+border: 1px solid Black;
+margin-inline: 2rem;
+`
 
 export default MessageList;
