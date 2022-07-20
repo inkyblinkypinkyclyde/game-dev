@@ -293,12 +293,18 @@ const GamesContainer = () => {
 
     useEffect(() => {
         socket.on('receive_player1', (data) => {
-            console.log("Data Received")
             setPlayerOneCells(data.newPlayerCells)
         })
         socket.on('receive_player2', (data) => {
-            console.log("Data Received")
             setPlayerTwoCells(data.newPlayerCells)
+        })
+    }, [socket])
+    useEffect(() => {
+        socket.on('receive_player1_ships', (data) => {
+            setPlayerOneShips(data.newShipList)
+        })
+        socket.on('receive_player2_ships', (data) => {
+            setPlayerTwoShips(data.newShipList)
         })
     }, [socket])
 
@@ -371,6 +377,7 @@ const GamesContainer = () => {
                 }
             })
             setPlayerOneShips(newShipList)
+            socket.emit('send_player1_ships', { newShipList })
         } else {
             playerTwoShips.map((shipInList) => {
                 if (shipInList !== playerTwoActiveShip) {
@@ -378,6 +385,7 @@ const GamesContainer = () => {
                 }
             })
             setPlayerTwoShips(newShipList)
+            socket.emit('send_player2_ships', { newShipList })
         }
     }
     const placeShipOnHorizontalPlayerOne = (clickedCell, width, shipLength) => {
@@ -435,7 +443,7 @@ const GamesContainer = () => {
         })
     }
     const placeShipOnHorizontalPlayerTwo = (clickedCell, width, shipLength) => {
-        console.log(`ship length is:  ` + shipLength)
+        // console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerTwoCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceHorizontalCheck(clickedCell, 4, shipLength)) {
@@ -463,7 +471,7 @@ const GamesContainer = () => {
         })
     }
     const placeShipOnVerticalPlayerTwo = (clickedCell, width, shipLength) => {
-        console.log(`ship length is:  ` + shipLength)
+        // console.log(`ship length is:  ` + shipLength)
         const newPlayerCells = [...playerTwoCells]
         newPlayerCells.forEach((playerCell, index) => {
             if (playerCell._cellId === clickedCell && canPlaceVerticalCheck(clickedCell, 4, shipLength)) {
