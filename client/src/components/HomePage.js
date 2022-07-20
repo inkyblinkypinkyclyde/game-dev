@@ -50,12 +50,12 @@ const HomePage = () => {
         <PreviewSection ref={ref}>
           <PreviewHeader>Check out our featured Games!</PreviewHeader>
           <CardContainer>
-            <GameImage src={placeholder}/>
+            <GameImage src="https://i.imgur.com/nHpLxfG.png"/>
             <div>
               <GameTitle>Battleship</GameTitle>
               <GameDescription>Battleship is the classic naval combat game that brings together competition, strategy, and excitement. In head-to-head battle, you search for the enemy s fleet of ships and destroy them one by one. No ship is safe in this game of stealth and suspense. Try to protect your own fleet while you annihilate your opponents.</GameDescription>
               <Play>
-                <Link to='/battleship'>
+                <Link to='/battleships/start'>
                   <CardButton>PLAY A GAME <i className='far fa-play-circle'/></CardButton>
                 </Link> 
               </Play>

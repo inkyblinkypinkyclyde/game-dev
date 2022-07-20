@@ -289,7 +289,7 @@ const GamesContainer = () => {
         }
     ])
 
-
+    const [playersReady, setPlayersReady] = useState(false)
 
     const [playerOneHits, setPlayerOneHits] = useState(9)
     const [playerTwoHits, setPlayerTwoHits] = useState(9)
@@ -318,6 +318,15 @@ const GamesContainer = () => {
         })
     }, [socket])
 
+    useEffect(() => {
+        console.log('use effect triggered')
+        console.log(`player one ships left: ` + playerOneShips.length)
+        console.log(`player two ships left: ` + playerTwoShips.length)
+        // setGamePhaseToOne()
+        if (playerOneShips.length === 0 && playerTwoShips.length === 0) { setGamePhase(1) }
+    }, [playerTwoShips, playerOneShips])
+
+
     const [playerOneActiveShip, setPlayerOneActiveShip] = useState(null)
     const [playerTwoActiveShip, setPlayerTwoActiveShip] = useState(null)
     const [gamePhase, setGamePhase] = useState(0)
@@ -345,34 +354,34 @@ const GamesContainer = () => {
     const height = 4;
     const width = 4;
 
-    // function remainingInRow(index, length) {
-    //     const fromStartOfRow = index % width;
-    //     const remaining = width - fromStartOfRow;
-    //     return remaining >= length;
-    // }
+    function remainingInRow(index, length) {
+        const fromStartOfRow = index % width;
+        const remaining = width - fromStartOfRow;
+        return remaining >= length;
+    }
 
-    // function remainingInColumn(index, length) {
-    //     const fromStartOfColumn = Math.floor(index / height);
-    //     const remaining = height - fromStartOfColumn;
-    //     return remaining >= length;
-    // }
+    function remainingInColumn(index, length) {
+        const fromStartOfColumn = Math.floor(index / height);
+        const remaining = height - fromStartOfColumn;
+        return remaining >= length;
+    }
 
-    // let index;
+    let index;
 
-    // index = grid.indexOf(7)
-    // const canPlaceWidth3At7 = remainingInRow(index, 3);
+    index = grid.indexOf(7)
+    const canPlaceWidth3At7 = remainingInRow(index, 3);
     // console.log({ canPlaceWidth3At7 });
 
-    // index = grid.indexOf(10)
-    // const canPlaceWidth3At10 = remainingInRow(index, 3);
+    index = grid.indexOf(10)
+    const canPlaceWidth3At10 = remainingInRow(index, 3);
     // console.log({ canPlaceWidth3At10 });
 
-    // index = grid.indexOf(3);
-    // const canPlaceHeight3At3 = remainingInColumn(index, 3);
+    index = grid.indexOf(3);
+    const canPlaceHeight3At3 = remainingInColumn(index, 3);
     // console.log({ canPlaceHeight3At3 })
 
-    // index = grid.indexOf(11);
-    // const canPlaceHeight3At11 = remainingInColumn(index, 3);
+    index = grid.indexOf(11);
+    const canPlaceHeight3At11 = remainingInColumn(index, 3);
     // console.log({ canPlaceHeight3At11 });
 
 
@@ -564,7 +573,7 @@ const GamesContainer = () => {
         })
         setPlayerOneCells(newPlayerCells)
         socket.emit('send_player1', { newPlayerCells })
-        const phase = 2
+        const phase = 1
         setGamePhase(phase)
         socket.emit('send_gamephase', { phase })
     }
@@ -583,10 +592,20 @@ const GamesContainer = () => {
         })
         setPlayerTwoCells(newPlayerCells)
         socket.emit('send_player2', { newPlayerCells })
-        const phase = 1
+        const phase = 2
         setGamePhase(phase)
         socket.emit('send_gamephase', { phase })
     }
+
+    const handleReadyButton = () => {
+        console.log('pressed button')
+        if (playerOneCells.length === 0)
+        setPlayerOneCells([])
+        if (playerTwoCells.length === 0)
+        setPlayerTwoCells([])
+
+    }
+
     const clickHandler = (id) => {
         console.log(`Click handler id is: ` + id)
         if (gamePhase === 0) {
@@ -614,13 +633,14 @@ const GamesContainer = () => {
                 }
             }
         } else {
-            if (gamePhase === 1) {
+            if (gamePhase === 1 && id >= 200 && id < 299) {
                 //player one turn
                 takeShotAtPlayerTwo(id)
                 setGamePhase(2)
             }
-            if (gamePhase === 2) {
+            if (gamePhase === 2 && id >= 100 && id <= 199) {
                 //player two turn
+                console.log('shot fired from player one to player two')
                 takeShotAtPlayerOne(id)
                 setGamePhase(1)
             }
@@ -647,6 +667,22 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
+                            handleReadyButton={handleReadyButton}
+                            
+                            />}
+                            />
+                    <Route
+                        path='/battleships/player_two'
+                        element={<PlayerTwo
+                            playerOneShips={playerOneShips}
+                            playerOneActiveShip={playerOneActiveShip}
+                            playerOneCells={playerOneCells}
+                            playerTwoShips={playerTwoShips}
+                            playerTwoActiveShip={playerTwoActiveShip}
+                            playerTwoCells={playerTwoCells}
+                            gamePhase={gamePhase}
+                            clickHandler={clickHandler}
+                            handleReadyButton={handleReadyButton}
 
                         />}
                     />
@@ -661,21 +697,6 @@ const GamesContainer = () => {
                             playerTwoCells={playerTwoCells}
                             gamePhase={gamePhase}
                             clickHandler={clickHandler}
-
-                        />}
-                    />
-                    <Route
-                        path='/battleships/player_two'
-                        element={<PlayerTwo
-                            playerOneShips={playerOneShips}
-                            playerOneActiveShip={playerOneActiveShip}
-                            playerOneCells={playerOneCells}
-                            playerTwoShips={playerTwoShips}
-                            playerTwoActiveShip={playerTwoActiveShip}
-                            playerTwoCells={playerTwoCells}
-                            gamePhase={gamePhase}
-                            clickHandler={clickHandler}
-                        // cellColor={cellColor}
                         />}
                     />
                     <Route path='/about' element={< About />} />

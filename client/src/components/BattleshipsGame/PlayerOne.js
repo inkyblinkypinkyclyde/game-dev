@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "./Grid.js";
 import PlayerShips from "./PlayerShips.js";
+import ReadyButton from "./ReadyButton.js";
 
 const PlayerOne = ({
     playerOneShips,
@@ -8,6 +9,8 @@ const PlayerOne = ({
     playerTwoShips,
     playerTwoCells,
     clickHandler,
+    readyState,
+    handleReadyButton,
     gamePhase }
 ) => {
     return (
@@ -24,6 +27,9 @@ const PlayerOne = ({
                 playerCells={playerOneCells}
                 clickHandler={clickHandler}
             />
+            <ReadyButton
+                handleReadyButton={handleReadyButton}
+             />
             <PlayerShips
                 playerShips={true}
                 playerOneShips={playerOneShips}
