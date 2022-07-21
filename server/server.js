@@ -1,16 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-
 app.use(express.json());
 app.use(cors());
 
-
-//CHATBOX DB
-
-
-
-//CHATBOX
 
 const http = require('http');
 const { Server } = require('socket.io');

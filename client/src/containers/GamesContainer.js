@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import About from '../components/About';
+import About from '../components/Pages/About';
 import Footer from '../components/Footer';
-import HomePage from '../components/HomePage';
+import HomePage from '../components/Pages/HomePage';
 import NavBar from '../components/NavBar';
 import GameStartPage from "../components/BattleshipsGame/GameStartPage.js";
 import PlayerOne from "../components/BattleshipsGame/PlayerOne.js";

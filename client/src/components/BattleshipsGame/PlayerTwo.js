@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import Grid from "./Grid.js";
 import PlayerShips from "./PlayerShips.js";
 import ReadyButton from "./ReadyButton.js";
@@ -15,7 +14,7 @@ const PlayerTwo = ({
     gamePhase }
 ) => {
     return (
-        <Div>
+        <>
             <h3>Enemy waters</h3>
             <Grid
                 playerGrid={false}
@@ -38,11 +37,7 @@ const PlayerTwo = ({
                 playerTwoShips={playerTwoShips}
                 clickHandler={clickHandler}
             />
-        </Div>
+        </>
     )
 }
-
-const Div = styled.div`
-margin-left: 2rem;
-`
 export default PlayerTwo

@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import HomeVideo from "../static/videos/arcade.mp4"
-import placeholder from "../static/images/placeholder.jpg"
-import ChatBox from "./ChatBox"
+import HomeVideo from "../../static/videos/arcade.mp4"
+import ChatBox from "../ChatBox/ChatBox"
 import io from 'socket.io-client';
-import MessageList from "./MessageList"
+import MessageList from "../ChatBox/MessageList"
 
 const socket = io.connect("http://localhost:3001")
 
@@ -94,7 +93,7 @@ const HomePage = () => {
 }
 
 const GameDescription = styled.p`
-margin-left:2rem;
+margin-inline:2rem;
 `
 
 const GameTitle = styled.h2`
