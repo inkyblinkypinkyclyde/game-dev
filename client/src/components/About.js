@@ -52,7 +52,7 @@ const About = () => {
                     </IconsDiv>
                 </Member>
                 <Member>
-                    <Image src="https://imgur.com/FkU3CpS"></Image>
+                    <Image src="https://i.imgur.com/FkU3CpS.png"></Image>
                     <h2>Richard Gannon</h2>
                     <IconsDiv>
                         <Github href="https://github.com/inkyblinkypinkyclyde"><i className="fa fa-github icon fa-3x"></i></Github>
@@ -61,6 +61,7 @@ const About = () => {
                 </Member>
                 <Member>
                     <Image src="https://i.imgur.com/5XamRWJ.png"></Image>
+
                     <h2>Michael Lyon</h2>
                     <IconsDiv>
                         <Github href="https://github.com/Michael19994"><i className="fa fa-github icon fa-3x"></i></Github>
