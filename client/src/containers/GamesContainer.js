@@ -307,12 +307,6 @@ const GamesContainer = () => {
         socket.on('receive_player2_ships', (data) => {
             setPlayerTwoShips(data.newShipList)
         })
-        socket.on('receive_player1_hits', (data) => {
-            setPlayerOneShips(data.newShipList)
-        })
-        socket.on('receive_player2_hits', (data) => {
-            setPlayerTwoShips(data.newShipList)
-        })
         socket.on('receive_gamephase', (data) => {
             setGamePhase(data.phase)
         })
