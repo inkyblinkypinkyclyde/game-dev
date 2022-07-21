@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import HomeVideo from "../static/videos/arcade.mp4"
-import placeholder from "../static/images/placeholder.jpg"
-import ChatBox from "./ChatBox"
+import HomeVideo from "../../static/videos/arcade.mp4"
+import ChatBox from "../ChatBox/ChatBox"
 import io from 'socket.io-client';
-import MessageList from "./MessageList"
+import MessageList from "../ChatBox/MessageList"
 
 const socket = io.connect("http://localhost:3001")
 
@@ -50,12 +49,12 @@ const HomePage = () => {
         <PreviewSection ref={ref}>
           <PreviewHeader>Check out our featured Games!</PreviewHeader>
           <CardContainer>
-            <GameImage src={placeholder}/>
+            <GameImage src="https://i.imgur.com/nHpLxfG.png"/>
             <div>
               <GameTitle>Battleship</GameTitle>
               <GameDescription>Battleship is the classic naval combat game that brings together competition, strategy, and excitement. In head-to-head battle, you search for the enemy s fleet of ships and destroy them one by one. No ship is safe in this game of stealth and suspense. Try to protect your own fleet while you annihilate your opponents.</GameDescription>
               <Play>
-                <Link to='/battleship'>
+                <Link to='/battleships/start'>
                   <CardButton>PLAY A GAME <i className='far fa-play-circle'/></CardButton>
                 </Link> 
               </Play>
@@ -135,8 +134,8 @@ width:57%;
 
 const Video = styled.video`
     object-fit: cover;
-    width:100%;
-    height:100%;
+    width:103%;
+    height:103%;
     position:absolute;
     z-index: -1;
 `

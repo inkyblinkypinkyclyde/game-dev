@@ -1,4 +1,3 @@
-import avatar from '../static/images/avatar_placeholder.png'
 import styled from 'styled-components'
 
 const About = () => {
@@ -61,6 +60,7 @@ const About = () => {
                 </Member>
                 <Member>
                     <Image src="https://i.imgur.com/5XamRWJ.png"></Image>
+
                     <h2>Michael Lyon</h2>
                     <IconsDiv>
                         <Github href="https://github.com/Michael19994"><i className="fa fa-github icon fa-3x"></i></Github>

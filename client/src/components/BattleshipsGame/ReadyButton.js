@@ -1,12 +1,17 @@
-// import React from "react";
-
-// const handleReadyButton = (evt) => setReadyState(evt.target.checked ? ev.target.checked : false);
+import React from "react";
 
 
-// const ReadyButton = () => {
-//     return (
-//         <button type="button" onClick={handleReadyButton}>Ready!</button>
-//     )
-// }
+const ReadyButton = ({handleReadyButton}) => {
 
-// export default ReadyButton;
+    // const [playerReady, setPlayerReady] = useState (false)
+
+    // const handleReadyButton = (evt) => setPlayerReady(true)
+    return (
+        <button type="button"
+        onClick={handleReadyButton}
+        // onClick={ReadyButton}
+        >Ready!</button>
+    )
+}
+
+export default ReadyButton;

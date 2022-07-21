@@ -40,7 +40,7 @@
   width: 70vw;
   max-width: 200%;
   background-color: #212121;
-  border: 3px solid;
+  border: 3px solid green;
   color: white;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   height: 40%;
@@ -87,6 +87,7 @@
   align-items: center;
   justify-content: center;
   justify-content: space-evenly;
+  margin-left: 6rem;
 }
 
 .grid-item {
