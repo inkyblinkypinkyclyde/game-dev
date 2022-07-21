@@ -26,7 +26,7 @@ const PlayerTwo = ({
                 clickHandler={clickHandler}
             />
             <ReadyButton
-                clickHandler={ }
+                // clickHandler={ }
             />
             <PlayerShips
                 playerShips={false}

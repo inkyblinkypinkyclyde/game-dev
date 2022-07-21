@@ -1,12 +1,12 @@
-import React from "react";
+// import React from "react";
 
-const handleReadyButton = (evt) => setReadyState(evt.target.checked ? ev.target.checked : false);
+// const handleReadyButton = (evt) => setReadyState(evt.target.checked ? ev.target.checked : false);
 
 
-const ReadyButton = () => {
-    return (
-        <button type="button" onClick={handleReadyButton}>Ready!</button>
-    )
-}
+// const ReadyButton = () => {
+//     return (
+//         <button type="button" onClick={handleReadyButton}>Ready!</button>
+//     )
+// }
 
-export default ReadyButton;
+// export default ReadyButton;
