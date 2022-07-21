@@ -1,16 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-
 app.use(express.json());
 app.use(cors());
 
-
-//CHATBOX DB
-
-
-
-//CHATBOX
 
 const http = require('http');
 const { Server } = require('socket.io');
@@ -29,11 +22,9 @@ io.on("connection", (socket) => {
     socket.on("send_message", (data) => {
         socket.broadcast.emit("receive_message", data)
     })
-
     socket.on("send_player1", (data) => {
         socket.broadcast.emit("receive_player1", data)
     })
-
     socket.on("send_player2", (data) => {
         socket.broadcast.emit("receive_player2", data)
     })
@@ -42,12 +33,6 @@ io.on("connection", (socket) => {
     })
     socket.on("send_player2_ships", (data) => {
         socket.broadcast.emit("receive_player2_ships", data)
-    })
-    socket.on("send_player1_hits", (data) => {
-        socket.broadcast.emit("receive_player1_hits", data)
-    })
-    socket.on("send_player2_hits", (data) => {
-        socket.broadcast.emit("receive_player2_hits", data)
     })
     socket.on("send_gamephase", (data) => {
         socket.broadcast.emit("receive_gamephase", data)
