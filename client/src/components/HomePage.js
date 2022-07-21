@@ -135,8 +135,8 @@ width:57%;
 
 const Video = styled.video`
     object-fit: cover;
-    width:100%;
-    height:100%;
+    width:103%;
+    height:103%;
     position:absolute;
     z-index: -1;
 `
