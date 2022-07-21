@@ -1,4 +1,3 @@
-import avatar from '../static/images/avatar_placeholder.png'
 import styled from 'styled-components'
 
 const About = () => {
