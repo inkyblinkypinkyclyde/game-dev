@@ -77,7 +77,7 @@ const HomePage = () => {
             <GameImageWAM src="https://i.imgur.com/O2UqN7m.jpg"/>
             <div>
               <GameTitle>Whack-A-Mole</GameTitle>
-              <GameDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed. Risus feugiat in ante metus dictum. Pellentesque habitant morbi tristique senectus et netus.</GameDescription>
+              <GameDescription>There are nine holes in the play area top are filled with virtual moles, which pop up at random. Points are scored by whacking each mole as it appears. If the player does not click a mole within a certain time, it eventually sinks back into its hole with no score. After a designated time limit, the game ends, regardless of the player's score. The final score is based on the number of moles the player struck.</GameDescription>
               <Play>
                 <Link to='/whack'>
                   <CardButton>PLAY GAME <i className='far fa-play-circle'/></CardButton>
