@@ -19,10 +19,10 @@ const Footer = () => {
           </Column>
           <Column>
             <Heading>Contact Us</Heading>
-            <FooterLink href="#">Jack Slater</FooterLink>
-            <FooterLink href="#">Calum Cook</FooterLink>
-            <FooterLink href="#">Name</FooterLink>
-            <FooterLink href="#">Michael Lyon</FooterLink>
+            <FooterLink href="https://www.linkedin.com/in/J-Slater99">Jack Slater</FooterLink>
+            <FooterLink href="https://linkedin.com/in/calum-cook89">Calum Cook</FooterLink>
+            <FooterLink href="https://www.linkedin.com/in/richard-gannon-66b49322a/">Richard Gannon</FooterLink>
+            <FooterLink href="https://www.linkedin.com/in/michael-lyon-6a211a227/">Michael Lyon</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>
