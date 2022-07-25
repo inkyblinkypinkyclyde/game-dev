@@ -28,26 +28,45 @@ Ship.prototype.rotate = function () {
     }
 }
 
-Ship.prototype.placementLimits = function (cellNumber, boardWidth, shipLength) {
-    if ((cellNumber % boardWidth) + shipLength <= boardWidth) {
+Ship.prototype.placementLimitsHorizontal = function (cellNumber, boardWidth) {
+    if ((cellNumber % boardWidth) + this.length.length <= boardWidth) {
         return true
     } else {
         return false
     }
 }
 
-Ship.prototype.addLocation = function (cellNumber, boardWidth) {
-    const shipLength = this.length.length
-    this.length.map((cell, index) => {
-        if (this.horizontal) {
-            if (this.placementLimits(cellNumber, boardWidth, shipLength)) {
-                cell.location = index
-            }
-        }
-        // if (!this.horizontal){
+Ship.prototype.placementLimitsVertical = function (cellNumber, boardWidth) {
+    if ((((boardWidth * boardWidth) - 1) - ((this.length.length - 1) * boardWidth)) >= cellNumber) {
+        return true
+    } else {
+        return false
+    }
+}
 
-        // }
+Ship.prototype.placeShipHorizontal = function (cellNumber) {
+    this.length.forEach((cell, index) => {
+        cell.location = cellNumber + index
     })
 }
+
+Ship.prototype.placeShipVertical = function (cellNumber, width) {
+    this.length.forEach((cell, index) => {
+        cell.location = cellNumber + (width * index)
+    })
+}
+
+Ship.prototype.addLocation = function (cellNumber, boardWidth, shipLength) {
+    if (this.horizontal) {
+        if (this.placementLimitsHorizontal(cellNumber, boardWidth, shipLength)) {
+            this.placeShipHorizontal(cellNumber)
+        }
+    } else {
+        if (this.placementLimitsVertical(cellNumber, boardWidth, shipLength)) {
+            this.placeShipVertical(cellNumber, boardWidth)
+        }
+    }
+}
+
 
 module.exports = Ship

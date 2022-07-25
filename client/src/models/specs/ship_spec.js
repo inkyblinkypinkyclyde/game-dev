@@ -71,69 +71,153 @@ describe('Ship', function () {
         assert.strictEqual(ship.horizontal, expected)
     })
     it('should return true for placements in far left column of 4x4 - 1/3', function () {
-        const answer = ship.placementLimits(0, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(0, 4)
         const expected = true
         assert.strictEqual(answer, expected)
     })
     it('should return true for placements in far left column of 4x4 - 2/3', function () {
-        const answer = ship.placementLimits(4, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(4, 4)
         const expected = true
         assert.strictEqual(answer, expected)
     })
     it('should return true for placements in far left column of 4x4 - 3/3', function () {
-        const answer = ship.placementLimits(8, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(8, 4)
         const expected = true
         assert.strictEqual(answer, expected)
     })
     it('should return true for placements in centre left column of 4x4 - 1/3', function () {
-        const answer = ship.placementLimits(1, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(1, 4)
         const expected = true
         assert.strictEqual(answer, expected)
     })
     it('should return true for placements in centre left column of 4x4 - 2/3', function () {
-        const answer = ship.placementLimits(5, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(5, 4)
         const expected = true
         assert.strictEqual(answer, expected)
     })
     it('should return true for placements in centre left column of 4x4 - 3/3', function () {
-        const answer = ship.placementLimits(9, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(9, 4)
         const expected = true
         assert.strictEqual(answer, expected)
     })
     it('should return false for placements in centre right column of 4x4 - 1/3', function () {
-        const answer = ship.placementLimits(2, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(2, 4)
         const expected = false
         assert.strictEqual(answer, expected)
     })
     it('should return false for placements in centre right column of 4x4 - 2/3', function () {
-        const answer = ship.placementLimits(6, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(6, 4)
         const expected = false
         assert.strictEqual(answer, expected)
     })
     it('should return false for placements in centre right column of 4x4 - 3/3', function () {
-        const answer = ship.placementLimits(10, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(10, 4)
         const expected = false
         assert.strictEqual(answer, expected)
     })
     it('should return false for placements in far right column of 4x4 - 1/3', function () {
-        const answer = ship.placementLimits(3, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(3, 4)
         const expected = false
         assert.strictEqual(answer, expected)
     })
     it('should return false for placements in far right column of 4x4 - 2/3', function () {
-        const answer = ship.placementLimits(7, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(7, 4)
         const expected = false
         assert.strictEqual(answer, expected)
     })
     it('should return false for placements in far right column of 4x4 - 3/3', function () {
-        const answer = ship.placementLimits(11, 4, 3)
+        ship.addLength(3)
+        const answer = ship.placementLimitsHorizontal(11, 4)
+        const expected = false
+        assert.strictEqual(answer, expected)
+    })
+    it('should return true for placements in top column of 4x4 - 1/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(0, 4)
+        const expected = true
+        assert.strictEqual(answer, expected)
+    })
+    it('should return true for placements in top column of 4x4 - 2/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(1, 4)
+        const expected = true
+        assert.strictEqual(answer, expected)
+    })
+    it('should return true for placements in top column of 4x4 - 3/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(3, 4)
+        const expected = true
+        assert.strictEqual(answer, expected)
+    })
+    it('should return true for placements in second top column of 4x4 - 1/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(4, 4)
+        const expected = true
+        assert.strictEqual(answer, expected)
+    })
+    it('should return true for placements in second top column of 4x4 - 2/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(6, 4)
+        const expected = true
+        assert.strictEqual(answer, expected)
+    })
+    it('should return true for placements in second top column of 4x4 - 3/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(7, 4)
+        const expected = true
+        assert.strictEqual(answer, expected)
+    })
+    it('should return false for placements in second bottom column of 4x4 - 1/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(8, 4)
+        const expected = false
+        assert.strictEqual(answer, expected)
+    })
+    it('should return false for placements in second bottom column of 4x4 - 2/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(9, 4)
+        const expected = false
+        assert.strictEqual(answer, expected)
+    })
+    it('should return false for placements in second bottom column of 4x4 - 3/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(11, 4)
+        const expected = false
+        assert.strictEqual(answer, expected)
+    })
+    it('should return false for placements in bottom column of 4x4 - 1/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(12, 4)
+        const expected = false
+        assert.strictEqual(answer, expected)
+    })
+    it('should return false for placements in bottom column of 4x4 - 2/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(13, 4)
+        const expected = false
+        assert.strictEqual(answer, expected)
+    })
+    it('should return false for placements in bottom column of 4x4 - 3/3', function () {
+        ship.addLength(3)
+        const answer = ship.placementLimitsVertical(15, 4)
         const expected = false
         assert.strictEqual(answer, expected)
     })
 
     it('should place a ship horizontally in any cell', function () {
         ship.addLength(2)
-        ship.addLocation(0, 4)
+        ship.addLocation(0, 4, 2)
         const expected = [
             {
                 _cellId: 0,
@@ -149,10 +233,10 @@ describe('Ship', function () {
         assert.deepStrictEqual(ship.length, expected)
     })
 
-    xit('should place a ship vertically in any cell', function () {
+    it('should place a ship vertically in any cell', function () {
         ship.addLength(2)
         ship.rotate()
-        ship.addLocation(0, 4)
+        ship.addLocation(0, 4, 2)
         const expected = [
             {
                 _cellId: 0,
@@ -167,6 +251,4 @@ describe('Ship', function () {
         ]
         assert.deepStrictEqual(ship.length, expected)
     })
-
-
 })
