@@ -217,7 +217,7 @@ describe('Ship', function () {
 
     it('should place a ship horizontally in any cell', function () {
         ship.addLength(2)
-        ship.addLocation(0, 4, 2)
+        ship.addLocation(0, 4)
         const expected = [
             {
                 _cellId: 0,
@@ -236,7 +236,7 @@ describe('Ship', function () {
     it('should place a ship vertically in any cell', function () {
         ship.addLength(2)
         ship.rotate()
-        ship.addLocation(0, 4, 2)
+        ship.addLocation(0, 4)
         const expected = [
             {
                 _cellId: 0,

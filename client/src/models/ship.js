@@ -56,13 +56,13 @@ Ship.prototype.placeShipVertical = function (cellNumber, width) {
     })
 }
 
-Ship.prototype.addLocation = function (cellNumber, boardWidth, shipLength) {
+Ship.prototype.addLocation = function (cellNumber, boardWidth) {
     if (this.horizontal) {
-        if (this.placementLimitsHorizontal(cellNumber, boardWidth, shipLength)) {
+        if (this.placementLimitsHorizontal(cellNumber, boardWidth)) {
             this.placeShipHorizontal(cellNumber)
         }
     } else {
-        if (this.placementLimitsVertical(cellNumber, boardWidth, shipLength)) {
+        if (this.placementLimitsVertical(cellNumber, boardWidth)) {
             this.placeShipVertical(cellNumber, boardWidth)
         }
     }
