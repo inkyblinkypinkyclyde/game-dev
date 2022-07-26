@@ -108,4 +108,31 @@ describe('Grid', function () {
         assert.strictEqual(grid.cells[2].value, expected_2)
         assert.strictEqual(grid.cells[3].value, expected_3)
     })
+    it('should be able to add a ship, take a shot at the ship and register a hit on the grid 1/2', function () {
+        grid.addCells(4)
+        grid.placeShip(0, ship1, 2)
+        grid.addShot(0)
+        const expected_0 = 'h'
+        const expected_1 = 's'
+        const expected_2 = '_'
+        const expected_3 = '_'
+        assert.strictEqual(grid.cells[0].value, expected_0)
+        assert.strictEqual(grid.cells[1].value, expected_1)
+        assert.strictEqual(grid.cells[2].value, expected_2)
+        assert.strictEqual(grid.cells[3].value, expected_3)
+    })
+    it('should be able to add a ship, take a shot at the ship and register a hit on the grid 2/2', function () {
+        grid.addCells(4)
+        grid.placeShip(2, ship1, 2)
+        grid.addShot(2)
+        const expected_0 = '_'
+        const expected_1 = '_'
+        const expected_2 = 'h'
+        const expected_3 = 's'
+        assert.strictEqual(grid.cells[0].value, expected_0)
+        assert.strictEqual(grid.cells[1].value, expected_1)
+        assert.strictEqual(grid.cells[2].value, expected_2)
+        assert.strictEqual(grid.cells[3].value, expected_3)
+    })
+
 })

@@ -1,5 +1,4 @@
 const Cell = require('./cell.js')
-const Ship = require('./ship.js')
 
 const Grid = function (
     name
@@ -24,6 +23,14 @@ Grid.prototype.placeShip = function (cellId, ship, boardWidth) {
                 gridCell.value = 's'
             }
         })
+    })
+}
+
+Grid.prototype.addShot = function (cellId) {
+    this.cells.forEach((gridCell) => {
+        if (gridCell._cellId === cellId) {
+            gridCell.addShot()
+        }
     })
 }
 

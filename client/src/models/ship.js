@@ -68,5 +68,13 @@ Ship.prototype.addLocation = function (cellNumber, boardWidth) {
     }
 }
 
+Ship.prototype.addShot = function (gridCell) {
+    this.length.forEach((shipCell) => {
+        if (shipCell.location === gridCell) {
+            shipCell.shotAt = true
+        }
+    })
+}
+
 
 module.exports = Ship

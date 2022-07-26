@@ -251,4 +251,23 @@ describe('Ship', function () {
         ]
         assert.deepStrictEqual(ship.length, expected)
     })
+
+    it('should be able to register a shot on the ship', function () {
+        ship.addLength(2)
+        ship.addLocation(0, 4)
+        ship.addShot(0)
+        const expected = [
+            {
+                _cellId: 0,
+                location: 0,
+                shotAt: true,
+            },
+            {
+                _cellId: 1,
+                location: 1,
+                shotAt: false,
+            }
+        ]
+        assert.deepStrictEqual(ship.length, expected)
+    })
 })
