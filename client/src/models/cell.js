@@ -1,26 +1,21 @@
-const Ship = require("./ship")
-
 const Cell = function (
-    number
+    _cellId
 ) {
-    this.number = number
-    this.shipPresent = false
-    this.shotAt = false
+    this._cellId = _cellId
+    this.value = '_'
 }
 
 Cell.prototype.addShip = function () {
-    this.shipPresent = true
+    this.value = 's'
 }
 
 Cell.prototype.removeShip = function () {
-    this.shipPresent = false
-}
-Cell.prototype.addShip = function () {
-    this.shipPresent = true
+    this.value = '_'
 }
 
 Cell.prototype.addShot = function () {
-    this.shotAt = true
+    if (this.value === '_') { this.value = 'm' }
+    if (this.value === 's') { this.value = 'h' }
 }
 
 
