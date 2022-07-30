@@ -16,6 +16,7 @@ background-color: ${({
     cell,
     playerGrid
 }) => {
+        console.log(cell)
         if (cell._cellId < 0) {
             if (!cell.location) {
                 return 'grey'
@@ -28,6 +29,9 @@ background-color: ${({
             if (cell.value === 's' && playerGrid) { return 'black' }
             if (cell.value === 'h') { return 'red' }
             if (cell.value === 'm') { return 'blue' }
+            if (!cell.location) { return 'grey' }
+            if (cell.location && cell.shotAt) { return 'red' }
+            if (cell.location) { return 'black' }
             // if (cell.value === '') {}
             //     if (shipPresent === true) {
             //         return 'red'
@@ -43,11 +47,8 @@ background-color: ${({
 
 
 const Cell = ({ cell, clickHandler, playerGrid }) => {
-    // console.log(`player grid bool is: ` + playerGrid)
     const handleClick = () => {
-        // console.log(cell._cellId)
-        // console.log(cell)
-        clickHandler(cell._cellId)
+        // clickHandler(cell._cellId)
     }
 
     return (

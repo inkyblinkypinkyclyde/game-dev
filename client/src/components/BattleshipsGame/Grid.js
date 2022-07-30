@@ -4,7 +4,7 @@ import Cell from "./Cell";
 
 const DivGrid = styled.div`
 display: grid;
-grid-template-columns: 42px 42px 42px 42px;
+grid-template-columns: 42px 42px 42px 42px 42px 42px 42px 42px 42px 42px;
 `
 
 const Grid = ({
@@ -14,6 +14,7 @@ const Grid = ({
 }) => {
 
     const displayGrid = playerCells.map((cell) => {
+        // console.log(cell)
         return (
             <Cell
                 key={cell._cellId}

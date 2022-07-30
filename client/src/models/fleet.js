@@ -37,10 +37,31 @@ Fleet.prototype.findShipById = function (shipId) {
     return foundShip
 }
 
-Fleet.prototype.deploy = function (shipId, gridId, boardWidth) {
-    let deployedShip = this.findShipById(shipId)
-    deployedShip.addLocation(gridId, boardWidth)
-    this.deployed.push(deployedShip)
+Fleet.prototype.addShipToDeployed = function (ship) {
+    this.deployed.push(ship)
+}
+Fleet.prototype.addShipToUndployed = function (ship) {
+    this.deployed.push(ship)
+}
+Fleet.prototype.removeShipFromDeployed = function (shipToBeRemoved) {
+    this.deployed.map((shipInArray, index) => {
+        if (shipInArray === shipToBeRemoved) {
+            this.deployed.splice(index, 1)
+        }
+    })
+}
+Fleet.prototype.removeShipFromUndeployed = function (shipToBeRemoved) {
+    this.undeployed.map((shipInArray, index) => {
+        if (shipInArray === shipToBeRemoved) {
+            this.undeployed.splice(index, 1)
+        }
+    })
+}
+
+Fleet.prototype.deploy = function (ship, gridId, boardWidth) {
+    this.removeShipFromUndeployed(ship)
+    ship.addLocation(gridId, boardWidth)
+    this.addShipToDeployed(ship)
 }
 
 Fleet.prototype.addShot = function (gridId) {

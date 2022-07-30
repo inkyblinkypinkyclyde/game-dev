@@ -9,8 +9,9 @@ const Grid = function (
 
 Grid.prototype.addCells = function (numberToAdd) {
     for (let i = 0; i < numberToAdd; i++) {
+        const cell = new Cell(i)
         this.cells.push(
-            cell = new Cell(i)
+            cell
         )
     }
 }
